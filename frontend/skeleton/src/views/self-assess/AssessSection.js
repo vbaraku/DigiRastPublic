@@ -77,11 +77,12 @@ const AssessSection = ({ thematicElement }) => {
 
     return (
         <MainCard title={`Self-assessment - ${thematicElement}`}>
-            {/* <Button variant="outlined" startIcon={<ArrowBackIcon />} sx={{mb:1, mt: -1}}>
-                Home
-            </Button> */}
+            
             <Typography variant="h3" sx={{ mb: '15px' }}>
                 To what extent are the statements true / appropriate for your organization?
+                <IconButton variant="contained">
+                        <ArrowBackIcon/>
+                </IconButton>
             </Typography>
             <Typography variant="h4" sx={{ mb: '10px' }}>
                 Scale for answers from 1 to 5
@@ -93,10 +94,10 @@ const AssessSection = ({ thematicElement }) => {
             <Divider />
             <Box sx={{ minWidth: 120, marginTop: 2, textAlign: 'center' }}>
                 <form onSubmit={handleSubmit}>
-                    {questions.map((element) => (
+                    {questions.map((element, index) => (
                         <FormControl key={element.id} fullWidth sx={{ mb: 5 }}>
                             <FormLabel id="id" style={{ color: 'black', fontSize: '20px' }}>
-                                {element.statement}
+                                {++index}.  {element.statement}
                                 <QuestionToolTip explanation={element.explanation} />
                             </FormLabel>
                             <RadioGroup

@@ -3,8 +3,9 @@ import { forwardRef } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
-
+import { Card, CardContent, CardHeader, Divider, Typography, IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate} from "react-router-dom";
 // constant
 const headerSX = {
     '& .MuiCardHeader-action': { mr: 0 }
@@ -31,6 +32,7 @@ const MainCard = forwardRef(
         ref
     ) => {
         const theme = useTheme();
+        let navigate = useNavigate();
 
         return (
             <Card
@@ -48,22 +50,27 @@ const MainCard = forwardRef(
                     ...sx
                 }}
             >
-                {/* card header and action */}
-                {!darkTitle && title && <CardHeader sx={headerSX} title={title} action={secondary} />}
-                {darkTitle && title && (
-                    <CardHeader sx={headerSX} title={<Typography variant="h3">{title}</Typography>} action={secondary} />
-                )}
+                <>
+                    
+                    {/* card header and action */}
+                    {!darkTitle && title && <CardHeader style={{marginLeft: '15px', marginBottom: '-20px'}} sx={headerSX} title={title} action={secondary} />}
+                    {darkTitle && title && (
+                        <CardHeader sx={headerSX} title={<Typography variant="h3">{title}</Typography>} action={secondary} />
+                    )}
+                        <IconButton variant="contained" style={{marginTop: '-53px', marginLeft: 'auto', marginRight: '0px'}} onClick={() => navigate(-1)}>
+                            <ArrowBackIcon />
+                        </IconButton>
+                    {/* content & header divider */}
+                    {title && <Divider />}
 
-                {/* content & header divider */}
-                {title && <Divider />}
-
-                {/* card content */}
-                {content && (
-                    <CardContent sx={contentSX} className={contentClass}>
-                        {children}
-                    </CardContent>
-                )}
-                {!content && children}
+                    {/* card content */}
+                    {content && (
+                        <CardContent sx={contentSX} className={contentClass}>
+                            {children}
+                        </CardContent>
+                    )}
+                    {!content && children}
+                </>
             </Card>
         );
     }
