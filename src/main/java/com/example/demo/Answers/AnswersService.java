@@ -43,4 +43,8 @@ public class AnswersService {
         }
         return answerList;
     }
+
+    public List<String> getCountries(){
+        return answersDao.getCountries();
+    }
 }

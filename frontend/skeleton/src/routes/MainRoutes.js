@@ -20,13 +20,13 @@ const Home = Loadable(lazy(() => import('views/home/home')));
 const SelfAssess = Loadable(lazy(() => import('views/self-assess')));
 
 
-const Leadership = <AssessSection thematicElement="Leadership & Governance Practices" />;
-const Teaching = <AssessSection thematicElement="Teaching and Learning Practices" />;
-const Professional = <AssessSection thematicElement="Professional Development" />;
-const Infrastructure = <AssessSection thematicElement="Infrastructure" />;
-const Assessment = <AssessSection thematicElement="Assessment practices" />;
-const Content = <AssessSection thematicElement="Content and Curricula" />;
-const Collaboration = <AssessSection thematicElement="Collaboration and Networking" />;
+const Leadership = <AssessSection thematicElement="Leadership & Governance Practices" nextPage="teachingandlearningpractices" />;
+const Teaching = <AssessSection thematicElement="Teaching and Learning Practices" nextPage="professionaldevelopment" />;
+const Professional = <AssessSection thematicElement="Professional Development" nextPage="assessmentpractices" />;
+const Assessment = <AssessSection thematicElement="Assessment practices" nextPage="contentandcurricula"/>;
+const Content = <AssessSection thematicElement="Content and Curricula" nextPage="collaborationandnetworking" />;
+const Collaboration = <AssessSection thematicElement="Collaboration and Networking" nextPage="infrastructure" />;
+const Infrastructure = <AssessSection thematicElement="Infrastructure" nextPage="graphs"/>;
 
 // ==============================|| MAIN ROUTING ||============================== //
 

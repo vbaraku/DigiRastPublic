@@ -32,17 +32,28 @@ import axios from 'axios';
 import QuestionToolTip from './questiontooltip';
 
 // ==============================|| SAMPLE PAGE ||============================== //
-const AssessSection = ({ thematicElement }) => {
+const AssessSection = ({ thematicElement, nextPage }) => {
     const [questions, setQuestions] = React.useState([]);
     const [answers, setAnswers] = React.useState([]);
+    const [subElements, setSubElements] = React.useState([]);
     const navigate = useNavigate();
+
+    function getSubElements(data) {
+        //for each unique subelement from data array, add to the subelements array
+        let subElementsArray = [];
+        data.forEach((element) => {
+            if (!subElementsArray.includes(element.subElement)) {
+                subElementsArray.push(element.subElement);
+            }
+        });
+        setSubElements(subElementsArray);
+    }
+
     const getQuestions = async () => {
         try {
-            // Collaboration and Networking
             const response = await axios.get(`/api/questions?thematicElement=${thematicElement}`);
-            // const response = await axios.get(`/api/questions`);
-
             setQuestions(response.data);
+            getSubElements(response.data);
         } catch (err) {
             console.error(err);
         }
@@ -56,9 +67,14 @@ const AssessSection = ({ thematicElement }) => {
         event.preventDefault();
         try {
             const response = await axios.post('/api/answers/bulk_submit ', answers);
-            navigate('/selfassess');
+            if (nextPage == 'graphs') {
+                navigate('/graphs');
+            } else {
+                navigate('/selfassess/' + nextPage);
+            }
+            location.reload();
         } catch (err) {
-            alert("Something went wrong. Error: " + err);
+            alert('Something went wrong. Error: ' + err);
             console.error(err);
         }
     };
@@ -67,7 +83,7 @@ const AssessSection = ({ thematicElement }) => {
         let arr = [...answers];
         let index = arr.findIndex((answer) => answer.question === questionId);
         if (index === -1) {
-            arr.push({ question:questionId, rating: event.target.value });
+            arr.push({ question: questionId, rating: event.target.value });
         } else {
             arr[index].rating = event.target.value;
         }
@@ -77,12 +93,8 @@ const AssessSection = ({ thematicElement }) => {
 
     return (
         <MainCard title={`Self-assessment - ${thematicElement}`}>
-            
             <Typography variant="h3" sx={{ mb: '15px' }}>
                 To what extent are the statements true / appropriate for your organization?
-                <IconButton variant="contained">
-                        <ArrowBackIcon/>
-                </IconButton>
             </Typography>
             <Typography variant="h4" sx={{ mb: '10px' }}>
                 Scale for answers from 1 to 5
@@ -92,12 +104,19 @@ const AssessSection = ({ thematicElement }) => {
                 5 - Fully applicable / Exist in organization in all areas
             </Typography>
             <Divider />
+            <Typography variant="h4" sx={{ mb: '10px', mt: '10px' }}>
+                The following questions assess these sub-elements:
+            </Typography>
+            {subElements.map((subElement, index) => (
+                <Typography key={index} sx={{fontSize: 14, margin: 2}}> - {subElement}</Typography>
+            ))}
+            <Divider />
             <Box sx={{ minWidth: 120, marginTop: 2, textAlign: 'center' }}>
                 <form onSubmit={handleSubmit}>
                     {questions.map((element, index) => (
                         <FormControl key={element.id} fullWidth sx={{ mb: 5 }}>
                             <FormLabel id="id" style={{ color: 'black', fontSize: '20px' }}>
-                                {++index}.  {element.statement}
+                                {++index}. {element.statement}
                                 <QuestionToolTip explanation={element.explanation} />
                             </FormLabel>
                             <RadioGroup
@@ -116,7 +135,13 @@ const AssessSection = ({ thematicElement }) => {
                         </FormControl>
                     ))}
 
-                    <Button sx={{ marginTop: 2, width: '150px' }} disabled={answers.length != questions.length} variant="contained" type="submit" color="primary">
+                    <Button
+                        sx={{ marginTop: 2, width: '150px' }}
+                        disabled={answers.length != questions.length}
+                        variant="contained"
+                        type="submit"
+                        color="primary"
+                    >
                         Submit
                     </Button>
                 </form>

@@ -30,6 +30,8 @@ export default function Graphs() {
     const [yourThematic, setYourThematic] = React.useState({});
     const [averageThematic, setAverageThematic] = React.useState({});
 
+    const [countries, setCountries] = React.useState([]);
+
     const [VETType, setVETType] = React.useState(null);
     const [size, setSize] = React.useState(null);
     const [country, setCountry] = React.useState(null);
@@ -126,12 +128,22 @@ export default function Graphs() {
         }
     };
 
+    const getCountries = async () => {
+        try {
+            const response = await axios.get('api/answers/countries');
+            setCountries(response.data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     useEffect(() => {
         getYourData();
         getAverageData();
         getCompleted();
         getYourThematic();
         getAverageThematic();
+        getCountries();
     }, []);
 
     const data = [
@@ -453,7 +465,10 @@ export default function Graphs() {
                             Country:
                         </InputLabel>
                         <Select labelId="country" id="country" value={country} label="Country:" onChange={handleChange3}>
-                            <MenuItem value="Austria">Austria</MenuItem>
+                            {countries.map((country) => (
+                                <MenuItem value={country}>{country}</MenuItem>
+                            ))}
+                            {/* <MenuItem value="Austria">Austria</MenuItem>
                             <MenuItem value="Belgium">Belgium</MenuItem>
                             <MenuItem value="Bulgaria">Bulgaria</MenuItem>
                             <MenuItem value="Croatia">Croatia</MenuItem>
@@ -481,7 +496,7 @@ export default function Graphs() {
                             <MenuItem value="Spain">Spain</MenuItem>
                             <MenuItem value="Sweden">Sweden</MenuItem>
                             <MenuItem value="The United Kingdom">The United Kingdom</MenuItem>
-                            <MenuItem value="Other">Other</MenuItem>
+                            <MenuItem value="Other">Other</MenuItem> */}
                         </Select>
                         <TextField
                             sx={{ marginTop: 1.5, marginLeft: 1, display: displayCountry }}

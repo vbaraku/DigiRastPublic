@@ -19,4 +19,7 @@ public interface AnswersDao extends JpaRepository<Answers, Long>, JpaSpecificati
 
 	@Query("select count(distinct a.user) from Answers a")
 	Long countDistinctUsers();
+
+	@Query("select distinct u.country from Answers a join a.user u")
+	List<String> getCountries();
 }

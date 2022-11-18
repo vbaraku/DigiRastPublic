@@ -125,6 +125,18 @@ public class AnswersController {
 		}
 //		return answers;
 	}
+
+	@GetMapping("/countries")
+	public List<String> getCountries() {
+		try {
+			return answersService.getCountries();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+//		return answers;
+	}
+
 	
 
 }
