@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.Questions.Questions;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,4 +23,7 @@ public interface AnswersDao extends JpaRepository<Answers, Long>, JpaSpecificati
 
 	@Query("select distinct u.country from Answers a join a.user u")
 	List<String> getCountries();
+
+	@Query("select avg(a.rating) from Answers a join a.user u where u.organizationName = :orgName")
+	double getAverageOrgScore(@Param("orgName") String orgName);
 }

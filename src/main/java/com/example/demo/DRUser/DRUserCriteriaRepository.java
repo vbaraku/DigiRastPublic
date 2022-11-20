@@ -45,7 +45,6 @@ public class DRUserCriteriaRepository {
 
         Join<DRUser, Answers> answers = drUserRoot.join("answers", JoinType.INNER);
         criteriaQuery.select(cb.countDistinct(answers.get("user"))).where(predicate);
-
         TypedQuery<Long> typedQuery = em.createQuery(criteriaQuery);
         return typedQuery.getSingleResult();
 
@@ -88,7 +87,7 @@ public class DRUserCriteriaRepository {
 
         TypedQuery<AverageQuery> typedQuery = em.createQuery(criteriaQuery);
         List<AverageQuery> res = typedQuery.getResultList();
-        res.forEach(el->resMap.put(el.getId(), el.getScore()));
+        res.forEach(el -> resMap.put(el.getId(), el.getScore()));
         return resMap;
 
     }
@@ -102,10 +101,10 @@ public class DRUserCriteriaRepository {
                 "Infrastructure",
                 "Leadership & Governance Practices",
                 "Teaching and Learning Practices"};
-       Arrays.asList(questions).stream().forEach(el->{
-           averageQueries.put(el, 0d);
-       });
-       return averageQueries;
+        Arrays.asList(questions).stream().forEach(el -> {
+            averageQueries.put(el, 0d);
+        });
+        return averageQueries;
     }
 
 

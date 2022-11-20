@@ -22,6 +22,9 @@ public class DRUser implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "organization_name")
+    private String organizationName;
+
     @Column(name = "vet_type")
     private String vetType;
 
@@ -63,9 +66,10 @@ public class DRUser implements UserDetails {
         this.password = password;
     }
 
-    public DRUser(String vetType, String size, String type, String country,
+    public DRUser(String organizationName, String vetType, String size, String type, String country,
                   String job, String workExp, String gender, String age) {
         super();
+        this.organizationName = organizationName;
         this.vetType = vetType;
         this.size = size;
         this.type = type;
@@ -178,6 +182,11 @@ public class DRUser implements UserDetails {
         this.age = age;
     }
 
+    public String getOrganizationName() {return organizationName;}
+
+    public void setOrganizationName(String organizationName){
+        this.organizationName = organizationName;
+    }
 
     public boolean isRegistered(){
         return !(workExp == null);

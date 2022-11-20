@@ -96,6 +96,7 @@ public class DRUserController {
     Optional<DRUser> userData = userDao.findByEmail(principal.getName());
     if (userData.isPresent()) {
       DRUser _user = userData.get();
+      _user.setOrganizationName(user.getOrganizationName());
       _user.setVetType(user.getVetType());
       _user.setSize(user.getSize());
       _user.setType(user.getType());

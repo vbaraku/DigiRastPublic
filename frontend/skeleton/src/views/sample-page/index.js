@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 export default function SamplePage() {
+    const [organizationName, setOrganizationName] = React.useState('');
     const [VETType, setVETType] = React.useState('');
     const [size, setSize] = React.useState('');
     const [typeOfOrg, setTypeOfOrg] = React.useState('');
@@ -76,12 +77,16 @@ export default function SamplePage() {
     const handleChange8 = (event) => {
         setAge(event.target.value);
     };
+    const handleChange0 = (event) => {
+        setOrganizationName(event.target.value);
+    };
 
     const navigate = useNavigate();
     const handleSubmit = async ( event ) => {
         event.preventDefault();
         try {
             const response = await axios.put('/api/user/', {
+                "organizationName" : organizationName,
                 "vetType": VETType,
                 "size": size,
                 "type": typeOfOrg,
@@ -110,7 +115,14 @@ export default function SamplePage() {
 
             <Box sx={{ minWidth: 120, marginTop: 2 }}>
                 <form onSubmit={handleSubmit}>
-                    <FormControl fullWidth>
+                <FormControl fullWidth>
+                        <InputLabel id="Organization name" htmlFor="Organization name">
+                            Organization name:
+                        </InputLabel>
+                        <TextField onChange={handleChange0} id="organizationname" variant="outlined" />
+                            
+                    </FormControl>
+                    <FormControl fullWidth sx={{ marginTop: 2 }}>
                         <InputLabel id="VET organization type" htmlFor="VET organization type">
                             VET organization type:
                         </InputLabel>
@@ -129,7 +141,7 @@ export default function SamplePage() {
                                 Continuing vocational education and training institutions (CVET)
                             </MenuItem>
                             <MenuItem value="Higher Education Institutions">Higher Education Institutions</MenuItem>
-                            <MenuItem value="Research & amp; Development Institutions">Research & amp; Development Institutions</MenuItem>
+                            <MenuItem value="Research & amp; Development Institutions">Research & Development Institutions</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                             </Select>
                             <TextField sx={{marginTop: 1.5, marginLeft:1, display: displayVet}} onChange={handleChange11} id="outlined-basic" helperText=" Please specify other organization type" variant="standard" />

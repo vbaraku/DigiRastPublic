@@ -7,6 +7,8 @@ import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ClearIcon from '@mui/icons-material/Clear';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import BusinessIcon from '@mui/icons-material/Business';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -18,6 +20,7 @@ import MyResponsiveRadar from './myresponsiveradar';
 import { ResponsiveRadar } from '@nivo/radar';
 import { ResponsiveLine } from '@nivo/line';
 import RevenueCard from 'ui-component/cards/RevenueCard';
+import QuestionToolTip from '../self-assess/questiontooltip';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 export default function Graphs() {
@@ -25,6 +28,7 @@ export default function Graphs() {
     /* eslint-disable */
     const [yourData, setYourData] = React.useState(0);
     const [averageData, setAverageData] = React.useState(0);
+    const [averageOrgData, setAverageOrgData] = React.useState(0);
     const [completed, setCompleted] = React.useState(0);
 
     const [yourThematic, setYourThematic] = React.useState({});
@@ -59,10 +63,14 @@ export default function Graphs() {
     const handeFilter = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get('api/answers/average_thematic', {params: {country: country, size: size, vetType : VETType}});
+            const response = await axios.get('api/answers/average_thematic', {
+                params: { country: country, size: size, vetType: VETType }
+            });
+            const response2 = await axios.get('api/answers/completed', { params: { country: country, size: size, vetType: VETType } });
             console.log(response);
             setAverageThematic(response.data);
-            console.log(yourThematic)
+            setCompleted(response2.data);
+            console.log(yourThematic);
         } catch (err) {
             console.error(err);
         }
@@ -71,7 +79,9 @@ export default function Graphs() {
     const resetFilters = async () => {
         try {
             const response = await axios.get('api/answers/average_thematic');
+            const response2 = await axios.get('api/answers/completed');
             setAverageThematic(response.data);
+            setCompleted(response2.data);
             setSize(null);
             setCountry(null);
             setVETType(null);
@@ -82,8 +92,17 @@ export default function Graphs() {
 
     const getYourData = async () => {
         try {
-            const response = await axios.get('api/answers/average', {params: {self: true}});
+            const response = await axios.get('api/answers/average', { params: { self: true } });
             setYourData(response.data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const getOrgAverageData = async () => {
+        try {
+            const response = await axios.get('api/answers/averageOrg', { params: { self: true } });
+            setAverageOrgData(response.data);
         } catch (err) {
             console.error(err);
         }
@@ -109,10 +128,10 @@ export default function Graphs() {
 
     const getYourThematic = async () => {
         try {
-            const response = await axios.get('api/answers/average_thematic', {params: {self: true}});
+            const response = await axios.get('api/answers/average_thematic', { params: { self: true } });
             console.log(response);
             setYourThematic(response.data);
-            console.log(yourThematic)
+            console.log(yourThematic);
         } catch (err) {
             console.error(err);
         }
@@ -144,43 +163,44 @@ export default function Graphs() {
         getYourThematic();
         getAverageThematic();
         getCountries();
+        getOrgAverageData();
     }, []);
 
     const data = [
         {
             thematicElement: 'LGP',
             'Your Score': yourThematic['Leadership & Governance Practices'] ? yourThematic['Leadership & Governance Practices'] : 0,
-            'Average Score': averageThematic['Leadership & Governance Practices'] ? averageThematic['Leadership & Governance Practices'] : 0,
+            'Average Score': averageThematic['Leadership & Governance Practices'] ? averageThematic['Leadership & Governance Practices'] : 0
         },
         {
             thematicElement: 'TLP',
             'Your Score': yourThematic['Teaching and Learning Practices'] ? yourThematic['Teaching and Learning Practices'] : 0,
-            'Average Score': averageThematic['Teaching and Learning Practices'] ? averageThematic['Teaching and Learning Practices'] : 0,
+            'Average Score': averageThematic['Teaching and Learning Practices'] ? averageThematic['Teaching and Learning Practices'] : 0
         },
         {
             thematicElement: 'PD',
             'Your Score': yourThematic['Professional Development'] ? yourThematic['Professional Development'] : 0,
-            'Average Score': averageThematic['Professional Development'] ? averageThematic['Professional Development'] : 0,
+            'Average Score': averageThematic['Professional Development'] ? averageThematic['Professional Development'] : 0
         },
         {
             thematicElement: 'AP',
             'Your Score': yourThematic['Assessment practices'] ? yourThematic['Assessment practices'] : 0,
-            'Average Score': averageThematic['Assessment practices'] ? averageThematic['Assessment practices'] : 0,
+            'Average Score': averageThematic['Assessment practices'] ? averageThematic['Assessment practices'] : 0
         },
         {
             thematicElement: 'CC',
             'Your Score': yourThematic['Content and Curricula'] ? yourThematic['Content and Curricula'] : 0,
-            'Average Score': averageThematic['Content and Curricula'] ? averageThematic['Content and Curricula'] : 0,
+            'Average Score': averageThematic['Content and Curricula'] ? averageThematic['Content and Curricula'] : 0
         },
         {
             thematicElement: 'CN',
             'Your Score': yourThematic['Collaboration and Networking'] ? yourThematic['Collaboration and Networking'] : 0,
-            'Average Score': averageThematic['Collaboration and Networking'] ? averageThematic['Collaboration and Networking'] : 0,
+            'Average Score': averageThematic['Collaboration and Networking'] ? averageThematic['Collaboration and Networking'] : 0
         },
         {
             thematicElement: 'I',
             'Your Score': yourThematic['Infrastructure'] ? yourThematic['Infrastructure'] : 0,
-            'Average Score': averageThematic['Infrastructure'] ? averageThematic['Infrastructure'] : 0,
+            'Average Score': averageThematic['Infrastructure'] ? averageThematic['Infrastructure'] : 0
         }
     ];
 
@@ -258,16 +278,25 @@ export default function Graphs() {
     return (
         <MainCard title="Graphs and Charts">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <div style={{ maxWidth: '300px', minWidth: '250px', margin: '12px' }}>
+                <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
                         primary="Your average score"
-                        secondary={yourData ? yourData.toFixed(2) : '0' }
+                        secondary={yourData ? yourData.toFixed(2) : '0'}
                         content="Out of a total 5"
                         iconPrimary={SportsScoreIcon}
                         color={theme.palette.primary.main}
                     />
                 </div>
-                <div style={{ maxWidth: '300px', minWidth: '250px', margin: '12px' }}>
+                <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
+                    <RevenueCard
+                        primary="Organization's average score"
+                        secondary={averageOrgData ? averageOrgData.toFixed(2) : '0'}
+                        content="Out of a total 5"
+                        iconPrimary={BusinessIcon}
+                        color={theme.palette.primary.main}
+                    />
+                </div>
+                <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
                         primary="Overall average score"
                         secondary={averageData.toFixed(2)}
@@ -276,11 +305,12 @@ export default function Graphs() {
                         color={theme.palette.primary.main}
                     />
                 </div>
-                <div style={{ maxWidth: '300px', minWidth: '250px', margin: '12px' }}>
+
+                <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary="Total number of completed assessments"
+                        primary={'Total number of completed assessments'}
                         secondary={completed}
-                        content=""
+                        content={''}
                         iconPrimary={FactCheckIcon}
                         color={theme.palette.primary.main}
                     />
@@ -417,7 +447,7 @@ export default function Graphs() {
                     />
                 </div>
                 <Divider />
-                <Typography sx={{ marginTop: 1.5, marginBottom: 1.5 }}>Filter the data: </Typography>
+                <Typography sx={{ marginTop: 1.5, marginBottom: 1.5 }}><QuestionToolTip explanation="This filter applies to graphs and the total number of completed assessments. To clear the filters, press the X button" /> Filter the data: </Typography>
                 <form onSubmit={handeFilter}>
                     <FormControl sx={{ margin: 1, width: '30%', minWidth: '240px' }}>
                         <InputLabel id="VET organization type" htmlFor="VET organization type">
@@ -437,7 +467,7 @@ export default function Graphs() {
                                 Continuing vocational education and training institutions (CVET)
                             </MenuItem>
                             <MenuItem value="Higher Education Institutions">Higher Education Institutions</MenuItem>
-                            <MenuItem value="Research & amp; Development Institutions">Research & amp; Development Institutions</MenuItem>
+                            <MenuItem value="Research & Development Institutions">Research & Development Institutions</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                         </Select>
                         <TextField
@@ -468,35 +498,6 @@ export default function Graphs() {
                             {countries.map((country) => (
                                 <MenuItem value={country}>{country}</MenuItem>
                             ))}
-                            {/* <MenuItem value="Austria">Austria</MenuItem>
-                            <MenuItem value="Belgium">Belgium</MenuItem>
-                            <MenuItem value="Bulgaria">Bulgaria</MenuItem>
-                            <MenuItem value="Croatia">Croatia</MenuItem>
-                            <MenuItem value="Republic of Cyprus">Republic of Cyprus</MenuItem>
-                            <MenuItem value="Czech Republic">Czech Republic</MenuItem>
-                            <MenuItem value="Denmark">Denmark</MenuItem>
-                            <MenuItem value="Estonia">Estonia</MenuItem>
-                            <MenuItem value="Finland">Finland</MenuItem>
-                            <MenuItem value="France">France</MenuItem>
-                            <MenuItem value="Germany">Germany</MenuItem>
-                            <MenuItem value="Greece">Greece</MenuItem>
-                            <MenuItem value="Hungary">Hungary</MenuItem>
-                            <MenuItem value="Ireland">Ireland</MenuItem>
-                            <MenuItem value="Italy">Italy</MenuItem>
-                            <MenuItem value="Latvia">Latvia</MenuItem>
-                            <MenuItem value="Lithuania">Lithuania</MenuItem>
-                            <MenuItem value="Luxembourg">Luxembourg</MenuItem>
-                            <MenuItem value="Malta">Malta</MenuItem>
-                            <MenuItem value="Netherlands">Netherlands</MenuItem>
-                            <MenuItem value="Poland">Poland</MenuItem>
-                            <MenuItem value="Portugal">Portugal</MenuItem>
-                            <MenuItem value="Romania">Romania</MenuItem>
-                            <MenuItem value="Slovakia">Slovakia</MenuItem>
-                            <MenuItem value="Slovenia">Slovenia</MenuItem>
-                            <MenuItem value="Spain">Spain</MenuItem>
-                            <MenuItem value="Sweden">Sweden</MenuItem>
-                            <MenuItem value="The United Kingdom">The United Kingdom</MenuItem>
-                            <MenuItem value="Other">Other</MenuItem> */}
                         </Select>
                         <TextField
                             sx={{ marginTop: 1.5, marginLeft: 1, display: displayCountry }}
@@ -506,9 +507,9 @@ export default function Graphs() {
                         />
                     </FormControl>
                     <IconButton onClick={resetFilters} size="large" sx={{ marginTop: 1.5, marginBottom: 1.5 }}>
-                                <ClearIcon/>
+                        <ClearIcon />
                     </IconButton>
-                    <Button sx={{marginLeft: 1, width: '150px' }} variant="contained" type="submit" color="primary">
+                    <Button sx={{ marginLeft: 1, width: '150px' }} variant="contained" type="submit" color="primary">
                         Filter
                     </Button>
                 </form>
