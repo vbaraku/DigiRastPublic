@@ -30,6 +30,7 @@ export default function Graphs() {
     const [averageData, setAverageData] = React.useState(0);
     const [averageOrgData, setAverageOrgData] = React.useState(0);
     const [completed, setCompleted] = React.useState(0);
+    const [message, setMessage] = React.useState('');
 
     const [yourThematic, setYourThematic] = React.useState({});
     const [averageThematic, setAverageThematic] = React.useState({});
@@ -94,6 +95,13 @@ export default function Graphs() {
         try {
             const response = await axios.get('api/answers/average', { params: { self: true } });
             setYourData(response.data);
+            if(response.data < 3){
+                setMessage('The digital profile achieved is lower-level grade overall. Please visit here the section/s with all training material for the area/s and retake the evaluation (after implementing improvement actions).');
+            } else if(response.data < 4){
+                setMessage('Well done, the digital profile achieved is good. Further information on the results is here: ');
+            } else {
+                setMessage('Congratulations, the digital profile achieved is advanced. Further information on the results is here: ');
+            }
         } catch (err) {
             console.error(err);
         }
@@ -277,6 +285,10 @@ export default function Graphs() {
 
     return (
         <MainCard title="Graphs and Charts">
+            <div style={{ marginBottom: 15, textAlign: 'center'}}>
+                <Typography style={{fontSize: '20px'}}>{message}</Typography>
+            </div>
+            <Divider />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard

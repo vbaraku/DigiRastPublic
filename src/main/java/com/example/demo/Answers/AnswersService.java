@@ -36,6 +36,11 @@ public class AnswersService {
             return new Answers(answer, user, question);
                 }
         ).collect(Collectors.toList());
+        for (Answers a : answerList) {
+            if(answersDao.findAnswersByQuestionIdAndUserId(a.question.getId(), a.user.getId()) != null){
+                answersDao.delete(answersDao.findAnswersByQuestionIdAndUserId(a.question.getId(), a.user.getId()));
+            }
+        }
         try {
             answersDao.saveAll(answerList);
         }catch (DataIntegrityViolationException e){

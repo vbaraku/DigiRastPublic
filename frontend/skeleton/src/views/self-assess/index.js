@@ -65,13 +65,37 @@ export default function SelfAssess() {
 
     return (
         <MainCard title="Self-assessment - Home">
+            <Typography style={{textAlign: 'left', marginBottom: 15, fontSize: '22px'}}>
+            In this section 7 different thematic areas are presented. Please click on each one to start the test.
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            1. Leadership & Governance Practices area refers to the leadership and governance practices in a VET organisation.
+            </Typography>
+            <Typography style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            2. Teaching and Learning Practices area refers on the integration of new teaching and learning practices in the organisations. 
+             </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            3. Professional Development area refers to the continuous, comprehensive, and tailor-made professional development of employees of CVET institutions, which is needed for ensuring high-quality teaching and learning processes, especially in the digital age.
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            4. Assessment practices area considers all actions to improve competences in the field of assessment practices in particular the context of their possible digitalisation.
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            5. Content and Curricula area considers as the role and expectation of teaching staff in the digital age is changing, one of the important new role of teachers/trainers is the organisation of the virtual learning environment. 
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            6. Collaboration and Networking area includes networks and digital learning technologies to support VET trainers, teachers and managers with all necessary tools, infrastructure, and support systems to develop a culture of connected learning necessary for digital learning environments.
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
+            7. Infrastructure area investigates the question of how digital transformation can be applied to education as digital transformation is fundamental to every aspect of modern life.
+            </Typography>
+            <Divider style={{marginTop: 20, marginBottom: 20}} />
             {elements.map(({ category, value }) => {
                 return (
                     <Button
-                        disabled={value !== 0}
                         onClick={() => handleRedirect(category)}
                         variant="contained"
-                        sx={{ width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px' }}
+                        sx={{ width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px', backgroundColor: value !== 0 ? '#9AA497' : "primary" }}
                     >
                         {category}
                     </Button>

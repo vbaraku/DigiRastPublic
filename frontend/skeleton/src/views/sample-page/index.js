@@ -98,7 +98,6 @@ export default function SamplePage() {
             }).then(() => {
                 axios.get('/api/user/is_registered').then((response) => {
                     cookies.set("isRegistered", response.data, { path: '/' });
-                    // navigate('/home', { replace: true });
                     window.location.replace('/home');
                 });
             }
@@ -115,12 +114,8 @@ export default function SamplePage() {
 
             <Box sx={{ minWidth: 120, marginTop: 2 }}>
                 <form onSubmit={handleSubmit}>
-                <FormControl fullWidth>
-                        <InputLabel id="Organization name" htmlFor="Organization name">
-                            Organization name:
-                        </InputLabel>
-                        <TextField onChange={handleChange0} id="organizationname" variant="outlined" />
-                            
+                    <FormControl fullWidth>
+                        <TextField onChange={handleChange0} id="organizationname" label="Organization name: " variant="outlined" />     
                     </FormControl>
                     <FormControl fullWidth sx={{ marginTop: 2 }}>
                         <InputLabel id="VET organization type" htmlFor="VET organization type">
@@ -141,7 +136,7 @@ export default function SamplePage() {
                                 Continuing vocational education and training institutions (CVET)
                             </MenuItem>
                             <MenuItem value="Higher Education Institutions">Higher Education Institutions</MenuItem>
-                            <MenuItem value="Research & amp; Development Institutions">Research & Development Institutions</MenuItem>
+                            <MenuItem value="Research & Development Institutions">Research & Development Institutions</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>
                             </Select>
                             <TextField sx={{marginTop: 1.5, marginLeft:1, display: displayVet}} onChange={handleChange11} id="outlined-basic" helperText=" Please specify other organization type" variant="standard" />
@@ -221,7 +216,9 @@ export default function SamplePage() {
                         <Select required labelId="jobPosition" id="jobPosition" value={jobPosition} label="Job position:" onChange={handleChange5}>
                             <MenuItem value="Top management">Top management</MenuItem>
                             <MenuItem value="Middle management">Middle management</MenuItem>
-                            <MenuItem value="Specialist">Specialist</MenuItem>
+                            <MenuItem value="Teaching / Training staff">Teaching / Training staff</MenuItem>
+                            <MenuItem value="Research/ Scientific staff">Research / Scientific staff</MenuItem>
+                            <MenuItem value="Administration staff">Administration staff</MenuItem>
                             <MenuItem value="Other">Other</MenuItem>  
                         </Select>
                         <TextField sx={{marginTop: 1.5, marginLeft:1, display: displayJob}} onChange={handleChange51} id="outlined-basic" helperText=" Please specify other job position" variant="standard" />

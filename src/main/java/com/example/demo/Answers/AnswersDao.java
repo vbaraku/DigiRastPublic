@@ -26,4 +26,6 @@ public interface AnswersDao extends JpaRepository<Answers, Long>, JpaSpecificati
 
 	@Query("select avg(a.rating) from Answers a join a.user u where u.organizationName = :orgName")
 	double getAverageOrgScore(@Param("orgName") String orgName);
+
+	Answers findAnswersByQuestionIdAndUserId(Integer qId, long uId);
 }

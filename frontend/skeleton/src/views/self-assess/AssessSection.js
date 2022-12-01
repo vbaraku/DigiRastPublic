@@ -23,6 +23,7 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
+import InfoIcon from '@mui/icons-material/Info';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -37,6 +38,17 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     const [answers, setAnswers] = React.useState([]);
     const [subElements, setSubElements] = React.useState([]);
     const navigate = useNavigate();
+
+    const [elements, setElements] = useState([
+        { category: 'Leadership & Governance Practices', value: 0 },
+        { category: 'Teaching and Learning Practices', value: 0 },
+        { category: 'Professional Development', value: 0 },
+        { category: 'Assessment practices', value: 0 },
+        { category: 'Content and Curricula', value: 0 },
+        { category: 'Collaboration and Networking', value: 0 },
+        { category: 'Infrastructure', value: 0 }
+    ]);
+
 
     function getSubElements(data) {
         //for each unique subelement from data array, add to the subelements array
@@ -61,6 +73,14 @@ const AssessSection = ({ thematicElement, nextPage }) => {
 
     useEffect(() => {
         getQuestions();
+        axios.get('/api/answers/average_thematic', { params: { self: true } }).then((response) => {
+            let newElements = elements.map( el => {
+                return {...el, value: response.data[el.category]}
+                })
+            setElements(newElements)
+            console.log("new elements")
+            console.log(newElements);
+        });
     }, []);
 
     const handleSubmit = async (event) => {
@@ -91,8 +111,21 @@ const AssessSection = ({ thematicElement, nextPage }) => {
         console.log(arr);
     };
 
+    function alreadyTaken(){
+        return elements.find((element) => element.category === thematicElement).value > 0
+    }
+
     return (
         <MainCard title={`Self-assessment - ${thematicElement}`}>
+            <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 15}}>
+            <InfoIcon />
+            <Typography style={{ marginLeft: 4, fontSize: '20px'}}>
+                You have already finished this section once. Do you want to retake it?
+            </Typography>
+            </div>
+            <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 10}}>
+            <Divider width='100%'/>
+            </div>
             <Typography variant="h3" sx={{ mb: '15px' }}>
                 To what extent are the statements true / appropriate for your organization?
             </Typography>
