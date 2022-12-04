@@ -49,6 +49,7 @@ const AssessSection = ({ thematicElement, nextPage }) => {
         { category: 'Infrastructure', value: 0 }
     ]);
 
+    let index = elements.findIndex((element) => element.category === thematicElement);
 
     function getSubElements(data) {
         //for each unique subelement from data array, add to the subelements array
@@ -116,7 +117,7 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     }
 
     return (
-        <MainCard title={`Self-assessment - ${thematicElement}`}>
+        <MainCard title={`Self-assessment - ${++index}. ${thematicElement}`}>
             <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 15}}>
             <InfoIcon />
             <Typography style={{ marginLeft: 4, fontSize: '20px'}}>

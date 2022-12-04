@@ -90,14 +90,14 @@ export default function SelfAssess() {
             7. Infrastructure area investigates the question of how digital transformation can be applied to education as digital transformation is fundamental to every aspect of modern life.
             </Typography>
             <Divider style={{marginTop: 20, marginBottom: 20}} />
-            {elements.map(({ category, value }) => {
+            {elements.map(({ category, value }, index) => {
                 return (
                     <Button
                         onClick={() => handleRedirect(category)}
                         variant="contained"
                         sx={{ width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px', backgroundColor: value !== 0 ? '#9AA497' : "primary" }}
                     >
-                        {category}
+                        {++index}. {category}
                     </Button>
                 );
             })}

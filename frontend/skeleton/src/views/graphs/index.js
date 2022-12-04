@@ -320,7 +320,7 @@ export default function Graphs() {
 
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary={'Total number of completed assessments'}
+                        primary={'Total number of completed assessments (based on filters)'}
                         secondary={completed}
                         content={''}
                         iconPrimary={FactCheckIcon}

@@ -16,7 +16,7 @@ public class Questions {
 	@Column(name = "thematic_element", length = 1000)
 	private String thematicElement;
 	
-	@Column(name = "sub_element", length = 1000)
+	@Column(name = "sub_element", length = 2000)
 	private String subElement;
 	
 	
