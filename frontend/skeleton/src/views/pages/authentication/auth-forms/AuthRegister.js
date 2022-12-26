@@ -38,6 +38,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useLanguage, useLanguageUpdate } from '../../../../LanguageContext';
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -53,6 +54,7 @@ const FirebaseRegister = ({ ...others }) => {
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
     const { firebaseRegister, firebaseGoogleSignIn } = useAuth();
+    const { language, dictionary } = useLanguage();
 
     const googleHandler = async () => {
         try {
@@ -85,7 +87,7 @@ const FirebaseRegister = ({ ...others }) => {
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">Sign up with Email address</Typography>
+                        <Typography variant="subtitle1">{dictionary.signUpWithEmail}</Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -252,7 +254,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign up
+                                    {dictionary.signUp}
                                 </Button>
                             </AnimateButton>
                         </Box>

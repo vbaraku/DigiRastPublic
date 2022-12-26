@@ -32,6 +32,7 @@ import { Formik } from 'formik';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
+import { useLanguage, useLanguageUpdate } from '../../../../LanguageContext';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -42,6 +43,7 @@ import Google from 'assets/images/icons/social-google.svg';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ loginProp, ...others }) => {
+    const { language, dictionary } = useLanguage();
     const navigate = useNavigate();
     const theme = useTheme();
     const scriptedRef = useScriptRef();
@@ -80,7 +82,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                     >
                         <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
                         <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
-                            Enter your credentials to continue
+                            {dictionary.enterCredentials}
                         </Typography>
                         <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
 
@@ -215,7 +217,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                         color="primary"
                                     />
                                 }
-                                label="Remember me"
+                                label={dictionary.rememberMe}
                             />
                         </Stack>
                         {errors.submit && (
@@ -235,7 +237,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign in
+                                    {dictionary.signIn}
                                 </Button>
                             </AnimateButton>
                         </Box>

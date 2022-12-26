@@ -31,22 +31,24 @@ import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import axios from 'axios';
 import QuestionToolTip from './questiontooltip';
+import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 const AssessSection = ({ thematicElement, nextPage }) => {
+    const { language, dictionary } = useLanguage();
     const [questions, setQuestions] = React.useState([]);
     const [answers, setAnswers] = React.useState([]);
     const [subElements, setSubElements] = React.useState([]);
     const navigate = useNavigate();
 
     const [elements, setElements] = useState([
-        { category: 'Leadership & Governance Practices', value: 0 },
-        { category: 'Teaching and Learning Practices', value: 0 },
-        { category: 'Professional Development', value: 0 },
-        { category: 'Assessment practices', value: 0 },
-        { category: 'Content and Curricula', value: 0 },
-        { category: 'Collaboration and Networking', value: 0 },
-        { category: 'Infrastructure', value: 0 }
+        { category: dictionary.leadershipAndGovernance, value: 0 },
+        { category: dictionary.teachingAndLearning, value: 0 },
+        { category: dictionary.professionalDevelopment, value: 0 },
+        { category: dictionary.assessmentPractices, value: 0 },
+        { category: dictionary.contentAndCurricula, value: 0 },
+        { category: dictionary.collaborationAndNetworking, value: 0 },
+        { category: dictionary.infrastructure, value: 0 }
     ]);
 
     let index = elements.findIndex((element) => element.category === thematicElement);
@@ -117,29 +119,29 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     }
 
     return (
-        <MainCard title={`Self-assessment - ${++index}. ${thematicElement}`}>
+        <MainCard title={`${dictionary.selfAssess} - ${++index}. ${thematicElement}`}>
             <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 15}}>
             <InfoIcon />
             <Typography style={{ marginLeft: 4, fontSize: '20px'}}>
-                You have already finished this section once. Do you want to retake it?
+                {dictionary.youAlreadyCompleted}
             </Typography>
             </div>
             <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 10}}>
             <Divider width='100%'/>
             </div>
             <Typography variant="h3" sx={{ mb: '15px' }}>
-                To what extent are the statements true / appropriate for your organization?
+                {dictionary.toWhatExtend}
             </Typography>
             <Typography variant="h4" sx={{ mb: '10px' }}>
-                Scale for answers from 1 to 5
+                {dictionary.scale}
             </Typography>
-            <Typography variant="h5">1 - Not applicable at all / Doesn’t exist in the organisation,</Typography>
+            <Typography variant="h5">{dictionary.notApplicable}</Typography>
             <Typography variant="h5" sx={{ mb: '10px' }}>
-                5 - Fully applicable / Exist in organization in all areas
+                {dictionary.fullyApplicable}
             </Typography>
             <Divider />
             <Typography variant="h4" sx={{ mb: '10px', mt: '10px' }}>
-                The following questions assess these sub-elements:
+                {dictionary.theFollowingAssess}
             </Typography>
             {subElements.map((subElement, index) => (
                 <Typography key={index} sx={{fontSize: 14, margin: 2}}> - {subElement}</Typography>
@@ -176,7 +178,7 @@ const AssessSection = ({ thematicElement, nextPage }) => {
                         type="submit"
                         color="primary"
                     >
-                        Submit
+                        {dictionary.submit}
                     </Button>
                 </form>
             </Box>

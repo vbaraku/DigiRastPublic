@@ -9,20 +9,22 @@ import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 export default function SelfAssess() {
+    const { language, dictionary } = useLanguage();
     const [answers, setAnswers] = useState({});
     // const elements = [["Leadership & Governance Practices" , 0], ["Teaching and Learning Practices", 0], ["Professional Development", 0],
     // ["Assessment practices", 0], ["Content and Curricula", 0], ["Collaboration and Networking", 0], ["Infrastructure", 0]]
-    const [elements, setElements] = useState([
-        { category: 'Leadership & Governance Practices', value: 0 },
-        { category: 'Teaching and Learning Practices', value: 0 },
-        { category: 'Professional Development', value: 0 },
-        { category: 'Assessment practices', value: 0 },
-        { category: 'Content and Curricula', value: 0 },
-        { category: 'Collaboration and Networking', value: 0 },
-        { category: 'Infrastructure', value: 0 }
+    const [elements, setElements] = useState([ 
+        { category: dictionary.leadershipAndGovernance, value: 0 },
+        { category: dictionary.teachingAndLearning, value: 0 },
+        { category: dictionary.professionalDevelopment, value: 0 },
+        { category: dictionary.assessmentPractices, value: 0 },
+        { category: dictionary.contentAndCurricula, value: 0 },
+        { category: dictionary.collaborationAndNetworking, value: 0 },
+        { category: dictionary.infrastructure, value: 0 }
     ]);
     useEffect(() => {
         axios.get('/api/answers/average_thematic', { params: { self: true } }).then((response) => {
@@ -64,30 +66,30 @@ export default function SelfAssess() {
     };
 
     return (
-        <MainCard title="Self-assessment - Home">
+        <MainCard title={dictionary.selfAssessHome}>
             <Typography style={{textAlign: 'left', marginBottom: 15, fontSize: '22px'}}>
-            In this section 7 different thematic areas are presented. Please click on each one to start the test.
+            {dictionary.selfAssessInfo1}
             </Typography>
             <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            1. Leadership & Governance Practices area refers to the leadership and governance practices in a VET organisation.
+            {dictionary.selfAssessArea1}
             </Typography>
-            <Typography style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            2. Teaching and Learning Practices area refers on the integration of new teaching and learning practices in the organisations. 
-             </Typography>
-            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            3. Professional Development area refers to the continuous, comprehensive, and tailor-made professional development of employees of CVET institutions, which is needed for ensuring high-quality teaching and learning processes, especially in the digital age.
+            <Typography style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}>
+            {dictionary.selfAssessArea2}
             </Typography>
             <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            4. Assessment practices area considers all actions to improve competences in the field of assessment practices in particular the context of their possible digitalisation.
+            {dictionary.selfAssessArea3}
             </Typography>
-            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            5. Content and Curricula area considers as the role and expectation of teaching staff in the digital age is changing, one of the important new role of teachers/trainers is the organisation of the virtual learning environment. 
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}>
+            {dictionary.selfAssessArea4}
             </Typography>
-            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            6. Collaboration and Networking area includes networks and digital learning technologies to support VET trainers, teachers and managers with all necessary tools, infrastructure, and support systems to develop a culture of connected learning necessary for digital learning environments.
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}>
+            {dictionary.selfAssessArea5}
             </Typography>
-            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}> 
-            7. Infrastructure area investigates the question of how digital transformation can be applied to education as digital transformation is fundamental to every aspect of modern life.
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}>
+            {dictionary.selfAssessArea6}
+            </Typography>
+            <Typography  style={{textAlign: 'left', marginBottom: 3, fontSize: '15px'}}>
+            {dictionary.selfAssessArea7}
             </Typography>
             <Divider style={{marginTop: 20, marginBottom: 20}} />
             {elements.map(({ category, value }, index) => {

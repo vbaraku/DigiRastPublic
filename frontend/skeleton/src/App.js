@@ -19,6 +19,7 @@ import Snackbar from 'ui-component/extended/Snackbar';
 
 // auth provider
 import { FirebaseProvider } from 'contexts/FirebaseContext';
+import LanguageProvider from './LanguageContext';
 // import { JWTProvider } from 'contexts/JWTContext';
 // import { Auth0Provider } from 'contexts/Auth0Context';
 
@@ -41,24 +42,26 @@ const App = () => {
         }
     );
     return (
-        <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={themes(customization)}>
-                <CssBaseline />
-                {/* RTL layout */}
-                {/* <RTLLayout> */}
-                <Locales>
-                    <NavigationScroll>
-                        <FirebaseProvider>
-                            <>
-                                <Routes />
-                                <Snackbar />
-                            </>
-                        </FirebaseProvider>
-                    </NavigationScroll>
-                </Locales>
-                {/* </RTLLayout> */}
-            </ThemeProvider>
-        </StyledEngineProvider>
+        <LanguageProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={themes(customization)}>
+                    <CssBaseline />
+                    {/* RTL layout */}
+                    {/* <RTLLayout> */}
+                    <Locales>
+                        <NavigationScroll>
+                            <FirebaseProvider>
+                                <>
+                                    <Routes />
+                                    <Snackbar />
+                                </>
+                            </FirebaseProvider>
+                        </NavigationScroll>
+                    </Locales>
+                    {/* </RTLLayout> */}
+                </ThemeProvider>
+            </StyledEngineProvider>
+        </LanguageProvider>
     );
 };
 

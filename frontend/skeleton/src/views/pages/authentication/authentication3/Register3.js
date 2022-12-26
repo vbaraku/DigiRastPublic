@@ -12,6 +12,7 @@ import AuthRegister from '../auth-forms/AuthRegister';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 import useAuth from 'hooks/useAuth';
 import Cookies from 'universal-cookie';
+import { useLanguage, useLanguageUpdate } from '../../../../LanguageContext';
 
 // assets
 
@@ -22,6 +23,7 @@ const Register = () => {
     const cookies = new Cookies();
     const isLoggedIn = cookies.get("Authorization");
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+    const { language, dictionary } = useLanguage();
 
     return (
         <AuthWrapper1>
@@ -50,14 +52,14 @@ const Register = () => {
                                                         gutterBottom
                                                         variant={matchDownSM ? 'h3' : 'h2'}
                                                     >
-                                                        Sign up
+                                                        {dictionary.signUp}
                                                     </Typography>
                                                     <Typography
                                                         variant="caption"
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
                                                     >
-                                                        Enter your credentials to continue
+                                                        {dictionary.enterCredentials}
                                                     </Typography>
                                                 </Stack>
                                             </Grid>
@@ -77,7 +79,7 @@ const Register = () => {
                                                 variant="subtitle1"
                                                 sx={{ textDecoration: 'none' }}
                                             >
-                                                Already have an account?
+                                                {dictionary.alreadyHaveAccount}
                                             </Typography>
                                         </Grid>
                                     </Grid>

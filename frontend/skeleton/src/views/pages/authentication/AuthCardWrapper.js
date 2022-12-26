@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 
 // project import
 import MainCard from 'ui-component/cards/MainCard';
+import TranslateTwoToneIcon from '@mui/icons-material/TranslateTwoTone';
+import LocalizationSection from "../../../layout/MainLayout/Header/LocalizationSection";
 
 // ==============================|| AUTHENTICATION CARD WRAPPER ||============================== //
 
@@ -21,6 +23,7 @@ const AuthCardWrapper = ({ children, ...other }) => (
         content={false}
         {...other}
     >
+        <LocalizationSection />
         <Box sx={{ p: { xs: 2, sm: 3, xl: 5 } }}>{children}</Box>
     </MainCard>
 );

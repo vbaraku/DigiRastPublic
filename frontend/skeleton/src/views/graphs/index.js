@@ -21,9 +21,11 @@ import { ResponsiveRadar } from '@nivo/radar';
 import { ResponsiveLine } from '@nivo/line';
 import RevenueCard from 'ui-component/cards/RevenueCard';
 import QuestionToolTip from '../self-assess/questiontooltip';
+import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 export default function Graphs() {
+    const { language, dictionary } = useLanguage();
     const theme = useTheme();
     /* eslint-disable */
     const [yourData, setYourData] = React.useState(0);
@@ -96,11 +98,11 @@ export default function Graphs() {
             const response = await axios.get('api/answers/average', { params: { self: true } });
             setYourData(response.data);
             if(response.data < 3){
-                setMessage('The digital profile achieved is lower-level grade overall. Please visit here the section/s with all training material for the area/s and retake the evaluation (after implementing improvement actions).');
+                setMessage(dictionary.graphMsg1);
             } else if(response.data < 4){
-                setMessage('Well done, the digital profile achieved is good. Further information on the results is here: ');
+                setMessage(dictionary.graphMsg2);
             } else {
-                setMessage('Congratulations, the digital profile achieved is advanced. Further information on the results is here: ');
+                setMessage(dictionary.graphMsg3);
             }
         } catch (err) {
             console.error(err);
@@ -284,7 +286,7 @@ export default function Graphs() {
     ];
 
     return (
-        <MainCard title="Graphs and Charts">
+        <MainCard title={dictionary.graphsAndCharts}>
             <div style={{ marginBottom: 15, textAlign: 'center'}}>
                 <Typography style={{fontSize: '20px'}}>{message}</Typography>
             </div>
@@ -292,27 +294,27 @@ export default function Graphs() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary="Your average score"
+                        primary={dictionary.yourAverageScore}
                         secondary={yourData ? yourData.toFixed(2) : '0'}
-                        content="Out of a total 5"
+                        content={dictionary.outOf5}
                         iconPrimary={SportsScoreIcon}
                         color={theme.palette.primary.main}
                     />
                 </div>
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary="Organization's average score"
+                        primary={dictionary.orgAverageScore}
                         secondary={averageOrgData ? averageOrgData.toFixed(2) : '0'}
-                        content="Out of a total 5"
+                        content={dictionary.outOf5}
                         iconPrimary={BusinessIcon}
                         color={theme.palette.primary.main}
                     />
                 </div>
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary="Overall average score"
-                        secondary={averageData.toFixed(2)}
-                        content="Out of a total 5"
+                        primary={dictionary.overallAverageScore}
+                        secondary={averageData ? averageData.toFixed(2) : '0'}
+                        content={dictionary.outOf5}
                         iconPrimary={BarChartIcon}
                         color={theme.palette.primary.main}
                     />
@@ -320,7 +322,7 @@ export default function Graphs() {
 
                 <div style={{ maxWidth: '250px', minWidth: '250px', margin: '10px' }}>
                     <RevenueCard
-                        primary={'Total number of completed assessments (based on filters)'}
+                        primary={dictionary.totalCompleted}
                         secondary={completed}
                         content={''}
                         iconPrimary={FactCheckIcon}
@@ -331,12 +333,16 @@ export default function Graphs() {
             <Divider />
             <div style={{ marginBottom: 5, marginTop: 10 }}>
                 <Typography variant="h4" sx={{ mb: 2 }}>
-                    Legend for charts:
+                    {dictionary.legend}
                 </Typography>
                 <Typography>
-                    LGP - Leadership & Governance Practices, <br />
-                    TLP - Teaching and Learning Practices, <br></br>PD - Professional Development, <br></br>AP - Assessment practices,
-                    <br></br>CC - Content and Curricula, <br></br>CN - Collaboration and Networking, <br></br>I - Infrastructure.
+                    {dictionary.LGPFull}, <br />
+                    {dictionary.TLPFull}, <br />
+                    {dictionary.PDFull}, <br />
+                    {dictionary.APFull}, <br />
+                    {dictionary.CCFull}, <br />
+                    {dictionary.CNFull}, <br />
+                    {dictionary.IFull}
                 </Typography>
             </div>
             <Divider />
@@ -459,62 +465,62 @@ export default function Graphs() {
                     />
                 </div>
                 <Divider />
-                <Typography sx={{ marginTop: 1.5, marginBottom: 1.5 }}><QuestionToolTip explanation="This filter applies to graphs and the total number of completed assessments. To clear the filters, press the X button" /> Filter the data: </Typography>
+                <Typography sx={{ marginTop: 1.5, marginBottom: 1.5 }}><QuestionToolTip explanation={dictionary.filterInfo} /> {dictionary.filterData} </Typography>
                 <form onSubmit={handeFilter}>
                     <FormControl sx={{ margin: 1, width: '30%', minWidth: '240px' }}>
                         <InputLabel id="VET organization type" htmlFor="VET organization type">
-                            VET organization type:
+                            {dictionary.VETOrgType}
                         </InputLabel>
                         <Select
                             labelId="VET organization type"
                             id="VET organization type"
                             value={VETType}
-                            label="VET organization type:"
+                            label={dictionary.VETOrgType}
                             onChange={handleChange1}
                         >
                             <MenuItem value="Initial vocational education and training institutions (IVET)">
-                                Initial vocational education and training institutions (IVET)
+                                {dictionary.IVET}
                             </MenuItem>
                             <MenuItem value="Continuing vocational education and training institutions (CVET)">
-                                Continuing vocational education and training institutions (CVET)
+                                {dictionary.CVET}
                             </MenuItem>
-                            <MenuItem value="Higher Education Institutions">Higher Education Institutions</MenuItem>
-                            <MenuItem value="Research & Development Institutions">Research & Development Institutions</MenuItem>
-                            <MenuItem value="Other">Other</MenuItem>
+                            <MenuItem value="Higher Education Institutions">{dictionary.HEI}</MenuItem>
+                            <MenuItem value="Research & Development Institutions">{dictionary.RDI}</MenuItem>
+                            <MenuItem value="Other">{dictionary.other}</MenuItem>
                         </Select>
                         <TextField
                             sx={{ marginTop: 1.5, marginLeft: 1, display: displayVet }}
                             id="outlined-basic"
-                            helperText=" Please specify other organization type"
+                            helperText={dictionary.pleaseSpecifyOtherOrg}
                             variant="standard"
                         />
                     </FormControl>
 
                     <FormControl sx={{ margin: 1, width: '30%', minWidth: '240px' }}>
                         <InputLabel id="size" htmlFor="size">
-                            Size:
+                            {dictionary.size}
                         </InputLabel>
-                        <Select labelId="size" id="size" value={size} label="Size:" onChange={handleChange2}>
-                            <MenuItem value="Micro">Micro: employment up to 9 persons</MenuItem>
-                            <MenuItem value="Small">Small: 10-50 employers</MenuItem>
-                            <MenuItem value="Medium">Medium: 51-250 employers</MenuItem>
-                            <MenuItem value="Large">Large: over 251 employers</MenuItem>
+                        <Select labelId="size" id="size" value={size} label={dictionary.size} onChange={handleChange2}>
+                            <MenuItem value="Micro">{dictionary.micro}</MenuItem>
+                            <MenuItem value="Small">{dictionary.small}</MenuItem>
+                            <MenuItem value="Medium">{dictionary.medium}</MenuItem>
+                            <MenuItem value="Large">{dictionary.large}</MenuItem>
                         </Select>
                     </FormControl>
 
                     <FormControl width={''} sx={{ margin: 1, width: '30%', minWidth: '240px' }}>
                         <InputLabel id="country" htmlFor="country">
-                            Country:
+                            {dictionary.country}
                         </InputLabel>
-                        <Select labelId="country" id="country" value={country} label="Country:" onChange={handleChange3}>
+                        <Select labelId="country" id="country" value={country} label={dictionary.country} onChange={handleChange3}>
                             {countries.map((country) => (
-                                <MenuItem value={country}>{country}</MenuItem>
+                                <MenuItem value={country}>{dictionary.country}</MenuItem>
                             ))}
                         </Select>
                         <TextField
                             sx={{ marginTop: 1.5, marginLeft: 1, display: displayCountry }}
                             id="outlined-basic"
-                            helperText=" Please specify other country"
+                            helperText={dictionary.pleaseSpecifyOtherCountry}
                             variant="standard"
                         />
                     </FormControl>
@@ -522,7 +528,7 @@ export default function Graphs() {
                         <ClearIcon />
                     </IconButton>
                     <Button sx={{ marginLeft: 1, width: '150px' }} variant="contained" type="submit" color="primary">
-                        Filter
+                        {dictionary.filter}
                     </Button>
                 </form>
             </Box>

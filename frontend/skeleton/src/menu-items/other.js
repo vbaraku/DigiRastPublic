@@ -13,7 +13,7 @@ const icons = {
     IconSitemap,
     IconChartLine
 };
-
+const language = localStorage.getItem('language') || 'en';
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
 const other = {
@@ -22,7 +22,7 @@ const other = {
     children: [
         {
             id: 'sample-page',
-            title: <FormattedMessage id="sample-page" />,
+            title: language === 'gr' ? 'Σελίδα εγγραφής' : language === 'it' ? 'Pagina di registrazione' : language === 'pl'? 'Strona rejestracji' : 'Registration page',
             type: 'item',
             url: '/registration',
             icon: icons.IconWriting,
@@ -30,7 +30,7 @@ const other = {
         },
         {
             id: 'documentation',
-            title: <FormattedMessage id="documentation" />,
+            title: language === 'gr' ? 'Ερωτηματολόγιο αυτοαξιολόγησης' : language === 'it' ? 'Questionario di autovalutazione' : language === 'pl'? 'Kwestionariusz samooceny' : 'Self-assessment questionnaire',
             type: 'item',
             url: '/selfassess',
             icon: icons.IconAd2,
@@ -38,7 +38,7 @@ const other = {
         },
         {
             id: 'roadmap',
-            title: <FormattedMessage id="graphs" />,
+            title: language === 'gr' ? 'Γραφήματα και γραφήματα' : language === 'it' ? 'Grafici e diagrammi' : language === 'pl'? 'Wykresy i diagramy' : 'Graphs and charts',
             type: 'item',
             url: '/graphs',
             icon: icons.IconChartLine,

@@ -12,6 +12,7 @@ import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 import useAuth from 'hooks/useAuth';
 import Cookies from 'universal-cookie';
+import { useLanguage, useLanguageUpdate } from '../../../../LanguageContext';
 // assets
 
 // ================================|| AUTH3 - LOGIN ||================================ //
@@ -22,6 +23,7 @@ const Login = () => {
     const isLoggedIn = cookies.get("Authorization");
 
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+    const { language, dictionary } = useLanguage();
 
     return (
         <AuthWrapper1>
@@ -50,14 +52,13 @@ const Login = () => {
                                                         gutterBottom
                                                         variant={matchDownSM ? 'h3' : 'h2'}
                                                     >
-                                                        Hi, Welcome Back
+                                                        {dictionary.hi}
                                                     </Typography>
                                                     <Typography
                                                         variant="h2"
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
                                                     >
-                                                        Project /tool description
                                                     </Typography>
                                                 </Stack>
                                             </Grid>
@@ -77,7 +78,7 @@ const Login = () => {
                                                 variant="subtitle1"
                                                 sx={{ textDecoration: 'none' }}
                                             >
-                                                Don&apos;t have an account?
+                                                {dictionary.dontHaveAccount}
                                             </Typography>
                                         </Grid>
                                     </Grid>
