@@ -6,6 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface QuestionsDao extends JpaRepository<Questions, Long> {
-		List<Questions> findByThematicElementContaining(String thematicElement);
+		List<Questions> findByThematicElementEnContaining(String thematicElementEn);
 		Optional<Questions> findById(Integer id);
 }

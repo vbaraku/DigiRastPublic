@@ -141,6 +141,8 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                     }
                                 })
                             });
+                            console.log("here")
+                            setErrors({ submit: dictionary.invalidLogin });
                     }catch (err) {
                         console.error(err);
                         if (scriptedRef.current) {
