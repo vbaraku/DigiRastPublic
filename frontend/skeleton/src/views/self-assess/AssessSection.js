@@ -54,21 +54,31 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     let index = elements.findIndex((element) => element.category === thematicElement);
 
     function getSubElements(data) {
-        //for each unique subelement from data array, add to the subelements array
         let subElementsArray = [];
         data.forEach((element) => {
-            if (!subElementsArray.includes(element.subElement)) {
-                subElementsArray.push(element.subElement);
+            if (!subElementsArray.includes(element.subElementEn) && language == 'en') {
+                subElementsArray.push(element.subElementEn);     
+            } else if (!subElementsArray.includes(element.subElementPl) && language == 'pl') {
+                subElementsArray.push(element.subElementPl);
+            } else if (!subElementsArray.includes(element.subElementIt) && language == 'it') {
+                subElementsArray.push(element.subElementIt);
+            } else if (!subElementsArray.includes(element.subElementGr) && language == 'gr') {
+                subElementsArray.push(element.subElementGr);
             }
         });
         setSubElements(subElementsArray);
     }
 
+
     const getQuestions = async () => {
         try {
             const response = await axios.get(`/api/questions?thematicElement=${thematicElement}`);
+            console.log("hello")
+            console.log('questions');
+            console.log(response.data);
             setQuestions(response.data);
             getSubElements(response.data);
+
         } catch (err) {
             console.error(err);
         }
@@ -115,7 +125,8 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     };
 
     function alreadyTaken(){
-        return elements.find((element) => element.category === thematicElement).value > 0
+        return false;
+        // elements.find((element) => element.category === thematicElement).value > 0
     }
 
     return (
@@ -152,8 +163,8 @@ const AssessSection = ({ thematicElement, nextPage }) => {
                     {questions.map((element, index) => (
                         <FormControl key={element.id} fullWidth sx={{ mb: 5 }}>
                             <FormLabel id="id" style={{ color: 'black', fontSize: '20px' }}>
-                                {++index}. {element.statement}
-                                <QuestionToolTip explanation={element.explanation} />
+                                {++index}. {language == 'en' ? element.statementEn : language == 'pl' ? element.statementPl : language == 'it' ? element.statementIt : element.statementGr}
+                                <QuestionToolTip explanation={language == 'en' ? element.explanationEn : language == 'pl' ? element.explanationPl : language == 'it' ? element.explanationIt : element.explanationGr} />
                             </FormLabel>
                             <RadioGroup
                                 sx={{ margin: 'auto' }}

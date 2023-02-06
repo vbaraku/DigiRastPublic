@@ -17,14 +17,19 @@ public class QuestionsController {
 	QuestionsDao questionsDao;
 	
 	@GetMapping
-	public List<Questions> getAllQuestions(@RequestParam(required = false) String thematicElementEn, Principal principal) {
+	public List<Questions> getAllQuestions(@RequestParam(required = false) String thematicElement, Principal principal) {
 		try {
 			List<Questions> questions = new ArrayList<Questions>();
-			System.out.println(principal);
-			if (thematicElementEn == null)
+			if (thematicElement == null)
 				questionsDao.findAll().forEach(questions::add);
 			else
-				questionsDao.findByThematicElementEnContaining(thematicElementEn).forEach(questions::add);
+				questionsDao.findByThematicElementEnContaining(thematicElement).forEach(questions::add);
+//			else if (language.equals("pl"))
+//				questionsDao.findByThematicElementPlContaining(thematicElement).forEach(questions::add);
+//			else if (language.equals("it"))
+//				questionsDao.findByThematicElementItContaining(thematicElement).forEach(questions::add);
+//			else if (language.equals("gr"))
+//				questionsDao.findByThematicElementGrContaining(thematicElement).forEach(questions::add);
 			if (questions.isEmpty()) {
 				return null;
 			}

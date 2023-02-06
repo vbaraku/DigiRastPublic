@@ -41,25 +41,25 @@ export default function SelfAssess() {
 
     const handleRedirect = (page) => {
         switch (page) {
-            case 'Leadership & Governance Practices':
+            case dictionary.leadershipAndGovernance:
                 navigate('/selfassess/leadershipandgovernancepractices');
                 break;
-            case 'Teaching and Learning Practices':
+            case dictionary.teachingAndLearning:
                 navigate('/selfassess/teachingandlearningpractices');
                 break;
-            case 'Professional Development':
+            case dictionary.professionalDevelopment:
                 navigate('/selfassess/professionaldevelopment');
                 break;
-            case 'Assessment practices':
+            case dictionary.assessmentPractices:
                 navigate('/selfassess/assessmentpractices');
                 break;
-            case 'Content and Curricula':
+            case dictionary.contentAndCurricula:
                 navigate('/selfassess/contentandcurricula');
                 break;
-            case 'Collaboration and Networking':
+            case dictionary.collaborationAndNetworking:
                 navigate('/selfassess/collaborationandnetworking');
                 break;
-            case 'Infrastructure':
+            case dictionary.infrastructure:
                 navigate('/selfassess/infrastructure');
                 break;
         }
