@@ -176,109 +176,113 @@ export default function Graphs() {
         getOrgAverageData();
     }, []);
 
+
+    const yourScoreDict = dictionary.yourScore
+    const averageScoreDict = dictionary.averageScore
+
     const data = [
         {
-            thematicElement: 'LGP',
-            'Your Score': yourThematic['Leadership & Governance Practices'] ? yourThematic['Leadership & Governance Practices'] : 0,
-            'Average Score': averageThematic['Leadership & Governance Practices'] ? averageThematic['Leadership & Governance Practices'] : 0
+            thematicElement: dictionary.LGP,
+            [yourScoreDict] : yourThematic['Leadership & Governance Practices'] ? yourThematic['Leadership & Governance Practices'] : 0,
+            [averageScoreDict]: averageThematic['Leadership & Governance Practices'] ? averageThematic['Leadership & Governance Practices'] : 0
         },
         {
-            thematicElement: 'TLP',
-            'Your Score': yourThematic['Teaching and Learning Practices'] ? yourThematic['Teaching and Learning Practices'] : 0,
-            'Average Score': averageThematic['Teaching and Learning Practices'] ? averageThematic['Teaching and Learning Practices'] : 0
+            thematicElement: dictionary.TLP,
+            [yourScoreDict]: yourThematic['Teaching and Learning Practices'] ? yourThematic['Teaching and Learning Practices'] : 0,
+            [averageScoreDict]: averageThematic['Teaching and Learning Practices'] ? averageThematic['Teaching and Learning Practices'] : 0
         },
         {
-            thematicElement: 'PD',
-            'Your Score': yourThematic['Professional Development'] ? yourThematic['Professional Development'] : 0,
-            'Average Score': averageThematic['Professional Development'] ? averageThematic['Professional Development'] : 0
+            thematicElement: dictionary.PD,
+            [yourScoreDict]: yourThematic['Professional Development'] ? yourThematic['Professional Development'] : 0,
+            [averageScoreDict]: averageThematic['Professional Development'] ? averageThematic['Professional Development'] : 0
         },
         {
-            thematicElement: 'AP',
-            'Your Score': yourThematic['Assessment practices'] ? yourThematic['Assessment practices'] : 0,
-            'Average Score': averageThematic['Assessment practices'] ? averageThematic['Assessment practices'] : 0
+            thematicElement: dictionary.AP,
+            [yourScoreDict]: yourThematic['Assessment practices'] ? yourThematic['Assessment practices'] : 0,
+            [averageScoreDict]: averageThematic['Assessment practices'] ? averageThematic['Assessment practices'] : 0
         },
         {
-            thematicElement: 'CC',
-            'Your Score': yourThematic['Content and Curricula'] ? yourThematic['Content and Curricula'] : 0,
-            'Average Score': averageThematic['Content and Curricula'] ? averageThematic['Content and Curricula'] : 0
+            thematicElement: dictionary.CC,
+            [yourScoreDict]: yourThematic['Content and Curricula'] ? yourThematic['Content and Curricula'] : 0,
+            [averageScoreDict]: averageThematic['Content and Curricula'] ? averageThematic['Content and Curricula'] : 0
         },
         {
-            thematicElement: 'CN',
-            'Your Score': yourThematic['Collaboration and Networking'] ? yourThematic['Collaboration and Networking'] : 0,
-            'Average Score': averageThematic['Collaboration and Networking'] ? averageThematic['Collaboration and Networking'] : 0
+            thematicElement: dictionary.CN,
+            [yourScoreDict]: yourThematic['Collaboration and Networking'] ? yourThematic['Collaboration and Networking'] : 0,
+            [averageScoreDict]: averageThematic['Collaboration and Networking'] ? averageThematic['Collaboration and Networking'] : 0
         },
         {
-            thematicElement: 'I',
-            'Your Score': yourThematic['Infrastructure'] ? yourThematic['Infrastructure'] : 0,
-            'Average Score': averageThematic['Infrastructure'] ? averageThematic['Infrastructure'] : 0
+            thematicElement: dictionary.I,
+            [yourScoreDict]: yourThematic['Infrastructure'] ? yourThematic['Infrastructure'] : 0,
+            [averageScoreDict]: averageThematic['Infrastructure'] ? averageThematic['Infrastructure'] : 0
         }
     ];
 
     const data2 = [
         {
-            id: 'Your Score',
+            id: dictionary.yourScore,
             color: 'hsl(239, 70%, 50',
             data: [
                 {
-                    x: 'LGP',
+                    x: dictionary.LGP,
                     y: yourThematic['Leadership & Governance Practices'] ? yourThematic['Leadership & Governance Practices'] : 0
                 },
                 {
-                    x: 'TLP',
+                    x: dictionary.TLP,
                     y: yourThematic['Teaching and Learning Practices'] ? yourThematic['Teaching and Learning Practices'] : 0
                 },
                 {
-                    x: 'PD',
+                    x: dictionary.PD,
                     y: yourThematic['Professional Development'] ? yourThematic['Professional Development'] : 0
                 },
                 {
-                    x: 'AP',
+                    x: dictionary.AP,
                     y: yourThematic['Assessment practices'] ? yourThematic['Assessment practices'] : 0
                 },
                 {
-                    x: 'CC',
+                    x: dictionary.CC,
                     y: yourThematic['Content and Curricula'] ? yourThematic['Content and Curricula'] : 0
                 },
                 {
-                    x: 'CN',
+                    x: dictionary.CN,
                     y: yourThematic['Collaboration and Networking'] ? yourThematic['Collaboration and Networking'] : 0
                 },
                 {
-                    x: 'I',
+                    x: dictionary.I,
                     y: yourThematic['Infrastructure'] ? yourThematic['Infrastructure'] : 0
                 }
             ]
         },
         {
-            id: 'Average Score',
+            id: dictionary.averageScore,
             color: 'hsl(46, 70%, 50%)',
             data: [
                 {
-                    x: 'LGP',
+                    x: dictionary.LGP,
                     y: averageThematic['Leadership & Governance Practices'] ? averageThematic['Leadership & Governance Practices'] : 0
                 },
                 {
-                    x: 'TLP',
+                    x: dictionary.TLP,
                     y: averageThematic['Teaching and Learning Practices'] ? averageThematic['Teaching and Learning Practices'] : 0
                 },
                 {
-                    x: 'PD',
+                    x: dictionary.PD,
                     y: averageThematic['Professional Development'] ? averageThematic['Professional Development'] : 0
                 },
                 {
-                    x: 'AP',
+                    x: dictionary.AP,
                     y: averageThematic['Assessment practices'] ? averageThematic['Assessment practices'] : 0
                 },
                 {
-                    x: 'CC',
+                    x: dictionary.CC,
                     y: averageThematic['Content and Curricula'] ? averageThematic['Content and Curricula'] : 0
                 },
                 {
-                    x: 'CN',
+                    x: dictionary.CN,
                     y: averageThematic['Collaboration and Networking'] ? averageThematic['Collaboration and Networking'] : 0
                 },
                 {
-                    x: 'I',
+                    x: dictionary.I,
                     y: averageThematic['Infrastructure'] ? averageThematic['Infrastructure'] : 0
                 }
             ]
@@ -350,7 +354,7 @@ export default function Graphs() {
                 <div style={{ height: '400px' }}>
                     <ResponsiveRadar
                         data={data}
-                        keys={['Your Score', 'Average Score']}
+                        keys={[yourScoreDict, averageScoreDict]}
                         indexBy="thematicElement"
                         valueFormat=">-.2f"
                         margin={{ top: 70, right: 45, bottom: 40, left: 50 }}
@@ -431,7 +435,7 @@ export default function Graphs() {
                             tickSize: 5,
                             tickPadding: 5,
                             tickRotation: 0,
-                            legend: 'Score',
+                            legend: dictionary.score,
                             legendOffset: -40,
                             legendPosition: 'middle'
                         }}

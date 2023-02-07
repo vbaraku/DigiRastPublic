@@ -18,13 +18,13 @@ export default function SelfAssess() {
     // const elements = [["Leadership & Governance Practices" , 0], ["Teaching and Learning Practices", 0], ["Professional Development", 0],
     // ["Assessment practices", 0], ["Content and Curricula", 0], ["Collaboration and Networking", 0], ["Infrastructure", 0]]
     const [elements, setElements] = useState([ 
-        { category: dictionary.leadershipAndGovernance, value: 0 },
-        { category: dictionary.teachingAndLearning, value: 0 },
-        { category: dictionary.professionalDevelopment, value: 0 },
-        { category: dictionary.assessmentPractices, value: 0 },
-        { category: dictionary.contentAndCurricula, value: 0 },
-        { category: dictionary.collaborationAndNetworking, value: 0 },
-        { category: dictionary.infrastructure, value: 0 }
+        { category: 'Leadership & Governance Practices', value: 0 },
+        { category: 'Teaching and Learning Practices', value: 0 },
+        { category: 'Professional Development', value: 0 },
+        { category: 'Assessment practices', value: 0 },
+        { category: 'Content and Curricula', value: 0 },
+        { category: 'Collaboration and Networking', value: 0 },
+        { category: 'Infrastructure', value: 0 }
     ]);
     useEffect(() => {
         axios.get('/api/answers/average_thematic', { params: { self: true } }).then((response) => {
@@ -41,29 +41,47 @@ export default function SelfAssess() {
 
     const handleRedirect = (page) => {
         switch (page) {
-            case dictionary.leadershipAndGovernance:
+            case 'Leadership & Governance Practices':
                 navigate('/selfassess/leadershipandgovernancepractices');
                 break;
-            case dictionary.teachingAndLearning:
+            case 'Teaching and Learning Practices':
                 navigate('/selfassess/teachingandlearningpractices');
                 break;
-            case dictionary.professionalDevelopment:
+            case 'Professional Development':
                 navigate('/selfassess/professionaldevelopment');
                 break;
-            case dictionary.assessmentPractices:
+            case 'Assessment practices':
                 navigate('/selfassess/assessmentpractices');
                 break;
-            case dictionary.contentAndCurricula:
+            case 'Content and Curricula':
                 navigate('/selfassess/contentandcurricula');
                 break;
-            case dictionary.collaborationAndNetworking:
+            case 'Collaboration and Networking':
                 navigate('/selfassess/collaborationandnetworking');
                 break;
-            case dictionary.infrastructure:
+            case 'Infrastructure':
                 navigate('/selfassess/infrastructure');
                 break;
         }
     };
+
+    function convertThematic(element) {
+        if (element === 'Leadership & Governance Practices') {
+            return dictionary.leadershipAndGovernance;
+        } else if (element === 'Teaching and Learning Practices') {
+            return dictionary.teachingAndLearning;
+        } else if (element === 'Professional Development') {
+            return dictionary.professionalDevelopment;
+        } else if (element === 'Assessment practices') {
+            return dictionary.assessmentPractices;
+        } else if (element === 'Content and Curricula') {
+            return dictionary.contentAndCurricula;
+        } else if (element === 'Collaboration and Networking') {
+            return dictionary.collaborationAndNetworking;
+        } else if (element === 'Infrastructure') {
+            return dictionary.infrastructure;
+        }
+    }
 
     return (
         <MainCard title={dictionary.selfAssessHome}>
@@ -99,7 +117,7 @@ export default function SelfAssess() {
                         variant="contained"
                         sx={{ width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px', backgroundColor: value > 0 ? '#9AA497' : "primary" }}
                     >
-                        {++index}. {category}
+                        {++index}. {convertThematic(category)}
                     </Button>
                 );
             })}

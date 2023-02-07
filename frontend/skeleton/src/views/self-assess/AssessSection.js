@@ -40,15 +40,14 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     const [answers, setAnswers] = React.useState([]);
     const [subElements, setSubElements] = React.useState([]);
     const navigate = useNavigate();
-
     const [elements, setElements] = useState([
-        { category: dictionary.leadershipAndGovernance, value: 0 },
-        { category: dictionary.teachingAndLearning, value: 0 },
-        { category: dictionary.professionalDevelopment, value: 0 },
-        { category: dictionary.assessmentPractices, value: 0 },
-        { category: dictionary.contentAndCurricula, value: 0 },
-        { category: dictionary.collaborationAndNetworking, value: 0 },
-        { category: dictionary.infrastructure, value: 0 }
+        { category: 'Leadership & Governance Practices', value: 0 },
+        { category: 'Teaching and Learning Practices', value: 0 },
+        { category: 'Professional Development', value: 0 },
+        { category: 'Assessment practices', value: 0 },
+        { category: 'Content and Curricula', value: 0 },
+        { category: 'Collaboration and Networking', value: 0 },
+        { category: 'Infrastructure', value: 0 }
     ]);
 
     let index = elements.findIndex((element) => element.category === thematicElement);
@@ -73,8 +72,6 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     const getQuestions = async () => {
         try {
             const response = await axios.get(`/api/questions?thematicElement=${thematicElement}`);
-            console.log("hello")
-            console.log('questions');
             console.log(response.data);
             setQuestions(response.data);
             getSubElements(response.data);
@@ -87,12 +84,12 @@ const AssessSection = ({ thematicElement, nextPage }) => {
     useEffect(() => {
         getQuestions();
         axios.get('/api/answers/average_thematic', { params: { self: true } }).then((response) => {
+            console.log("123")
+            console.log(response.data)
             let newElements = elements.map( el => {
                 return {...el, value: response.data[el.category]}
                 })
             setElements(newElements)
-            console.log("new elements")
-            console.log(newElements);
         });
     }, []);
 
@@ -121,16 +118,32 @@ const AssessSection = ({ thematicElement, nextPage }) => {
             arr[index].rating = event.target.value;
         }
         setAnswers(arr);
-        console.log(arr);
     };
 
     function alreadyTaken(){
-        return false;
-        // elements.find((element) => element.category === thematicElement).value > 0
+        return elements.find((element) => element.category === thematicElement).value > 0
+    }
+
+    function convertThematic() {
+        if (thematicElement === 'Leadership & Governance Practices') {
+            return dictionary.leadershipAndGovernance;
+        } else if (thematicElement === 'Teaching and Learning Practices') {
+            return dictionary.teachingAndLearning;
+        } else if (thematicElement === 'Professional Development') {
+            return dictionary.professionalDevelopment;
+        } else if (thematicElement === 'Assessment practices') {
+            return dictionary.assessmentPractices;
+        } else if (thematicElement === 'Content and Curricula') {
+            return dictionary.contentAndCurricula;
+        } else if (thematicElement === 'Collaboration and Networking') {
+            return dictionary.collaborationAndNetworking;
+        } else if (thematicElement === 'Infrastructure') {
+            return dictionary.infrastructure;
+        }
     }
 
     return (
-        <MainCard title={`${dictionary.selfAssess} - ${++index}. ${thematicElement}`}>
+        <MainCard title={`${dictionary.selfAssess} - ${++index}. ${convertThematic()}`}>
             <div style={{display: alreadyTaken() ? 'flex' : 'none', marginBottom: 15}}>
             <InfoIcon />
             <Typography style={{ marginLeft: 4, fontSize: '20px'}}>

@@ -83,7 +83,7 @@ public class DRUserCriteriaRepository {
         HashMap<String, Double> resMap = getEmptyCategories();
 
 
-        criteriaQuery.multiselect(cb.avg(answers.get("rating")), questions.get("thematicElement")).where(predicate).groupBy(questions.get("thematicElement"));
+        criteriaQuery.multiselect(cb.avg(answers.get("rating")), questions.get("thematicElementEn")).where(predicate).groupBy(questions.get("thematicElementEn"));
 
         TypedQuery<AverageQuery> typedQuery = em.createQuery(criteriaQuery);
         List<AverageQuery> res = typedQuery.getResultList();

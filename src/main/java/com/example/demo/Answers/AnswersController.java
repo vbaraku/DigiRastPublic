@@ -133,7 +133,6 @@ public class AnswersController {
 
     @PostMapping("/bulk_submit")
     public List<Answers> bulkSubmit(@RequestBody ArrayList<AnswerDTO> answers, Principal principal) {
-        System.out.println(principal.toString());
         try {
             return answersService.insertAnswers(answers, principal.getName());
         } catch (Exception e) {

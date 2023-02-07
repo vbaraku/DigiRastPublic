@@ -148,6 +148,7 @@ const english = {
     filter: 'Filter',
     filterData: 'Filter the data',
     filterInfo: 'This filter applies to graphs and the total number of completed assessments. To clear the filters, press the X button.',
+    score: 'Score',
 }
 
 const greek = {
@@ -300,6 +301,7 @@ const greek = {
     filter: '',
     filterData: '',
     filterInfo: '',
+    score: 'Σκορ',
 }
 
 const polish = {
@@ -452,6 +454,7 @@ const polish = {
     filter: 'Filtr',
     filterData: 'Filtruj dane',
     filterInfo: 'Ten filtr dotyczy wykresów i całkowitej liczby ukończonych ocen. Aby wyczyścić filtry, naciśnij przycisk X.',
+    score: 'Wynik',
 }
 
 const italian = {
@@ -604,6 +607,7 @@ const italian = {
     filter: 'Filtro',
     filterData: 'Filtra i dati',				
     filterInfo: 'Questo filtro si applica ai grafici e al numero totale delle valutazioni completate. Per cancellare i filtri clicca sul pulsante X.',
+    score: 'Punto',
 }
 
 export { english, greek, polish, italian };

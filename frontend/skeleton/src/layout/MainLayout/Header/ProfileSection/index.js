@@ -103,9 +103,9 @@ const ProfileSection = () => {
 
     return (
         <>
-            <ListItemButton sx={{ borderRadius: `25px`, maxWidth: '115px'}} selected={selectedIndex === 4} onClick={handleLogout}>
+            <ListItemButton sx={{ borderRadius: `25px`, maxWidth: language == 'pl' ? '140px' : '120px'}} selected={selectedIndex === 4} onClick={handleLogout}>
                 <ListItemIcon>
-                    <IconLogout stroke={1.5} size="1.3rem" />
+                    <IconLogout stroke={1.5} size="1.5rem" />
                 </ListItemIcon>
                 <ListItemText primary={<Typography variant="body2">{dictionary.logout}</Typography>} />
             </ListItemButton>
