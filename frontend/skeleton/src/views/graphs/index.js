@@ -518,7 +518,7 @@ export default function Graphs() {
                         </InputLabel>
                         <Select labelId="country" id="country" value={country} label={dictionary.country} onChange={handleChange3}>
                             {countries.map((country) => (
-                                <MenuItem value={country}>{dictionary.country}</MenuItem>
+                                <MenuItem value={country}>{dictionary[country.toLowerCase()]}</MenuItem>
                             ))}
                         </Select>
                         <TextField

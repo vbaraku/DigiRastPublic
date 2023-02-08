@@ -2,24 +2,24 @@ package com.example.demo.DRUser;
 
 public class AverageQuery {
     private Double score;
-    private String thematicElement;
+    private String thematicElementEn;
 
-    public AverageQuery(Double score, String thematicElement) {
+    public AverageQuery(Double score, String thematicElementEn) {
         setScore(score);
-        this.thematicElement = thematicElement;
+        this.thematicElementEn = thematicElementEn;
     }
 
-    public AverageQuery(String thematicElement) {
+    public AverageQuery(String thematicElementEn) {
         setScore(0d);
-        this.thematicElement = thematicElement;
+        this.thematicElementEn = thematicElementEn;
     }
 
     public String getId() {
-        return thematicElement;
+        return thematicElementEn;
     }
 
-    public void setId(String thematicElement) {
-        this.thematicElement = thematicElement;
+    public void setId(String thematicElementEn) {
+        this.thematicElementEn = thematicElementEn;
     }
 
     public Double getScore() {

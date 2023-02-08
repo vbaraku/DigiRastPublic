@@ -71,7 +71,7 @@ const AssessSection = ({ thematicElement, nextPage }) => {
 
     const getQuestions = async () => {
         try {
-            const response = await axios.get(`/api/questions?thematicElement=${thematicElement}`);
+            const response = await axios.get(`/api/questions?thematicElementEn=${thematicElement}`);
             console.log(response.data);
             setQuestions(response.data);
             getSubElements(response.data);

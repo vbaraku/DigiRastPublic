@@ -175,8 +175,8 @@ export default function SamplePage() {
                             <MenuItem value="Belgium">{dictionary.belgium}</MenuItem>
                             <MenuItem value="Bulgaria">{dictionary.bulgaria}</MenuItem>
                             <MenuItem value="Croatia">{dictionary.croatia}</MenuItem>
-                            <MenuItem value="Republic of Cyprus">{dictionary.cyprus}</MenuItem>
-                            <MenuItem value="Czech Republic">{dictionary.czech}</MenuItem>
+                            <MenuItem value="Cyprus">{dictionary.cyprus}</MenuItem>
+                            <MenuItem value="Czech">{dictionary.czech}</MenuItem>
                             <MenuItem value="Denmark">{dictionary.denmark}</MenuItem>
                             <MenuItem value="Estonia">{dictionary.estonia}</MenuItem>
                             <MenuItem value="Finland">{dictionary.finland}</MenuItem>
@@ -198,7 +198,7 @@ export default function SamplePage() {
                             <MenuItem value="Slovenia">{dictionary.slovenia}</MenuItem>
                             <MenuItem value="Spain">{dictionary.spain}</MenuItem>
                             <MenuItem value="Sweden">{dictionary.sweden}</MenuItem>
-                            <MenuItem value="The United Kingdom">{dictionary.unitedKingdom}</MenuItem>
+                            <MenuItem value="UnitedKingdom">{dictionary.unitedKingdom}</MenuItem>
                             <MenuItem value="Other">{dictionary.other}</MenuItem>
                             
                         </Select>
