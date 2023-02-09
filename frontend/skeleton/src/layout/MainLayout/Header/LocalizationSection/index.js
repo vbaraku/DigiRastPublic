@@ -15,7 +15,9 @@ import {
     Paper,
     Popper,
     Typography,
-    useMediaQuery
+    useMediaQuery,
+    Backdrop,
+    CircularProgress
 } from '@mui/material';
 
 // project imports
@@ -38,6 +40,7 @@ const LocalizationSection = () => {
     const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
 
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
     /**
      * anchorRef is used on different componets and specifying one type leads to other components throwing an error
      * */
@@ -48,6 +51,7 @@ const LocalizationSection = () => {
         setLanguage(lng);
         dispatch({ type: actionTypes.THEME_LOCALE, locale: lng });
         setOpen(false);
+        setOpen2(true);
         window.location.reload();
     };
 
@@ -115,6 +119,16 @@ const LocalizationSection = () => {
                         {language === 'en' && <TranslateTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
                     </Avatar>
                 </ButtonBase>
+                <Backdrop
+                    // make component show on top of every parent component
+                    sx={{
+                        zIndex: (theme) => theme.zIndex.drawer + 10,
+                        color: '#ffffff'
+                    }}
+                    open={open2}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
             </Box>
             <Popper
                 placement={matchesXs ? 'bottom-start' : 'bottom'}

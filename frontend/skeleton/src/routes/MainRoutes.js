@@ -81,7 +81,11 @@ const MainRoutes = {
         {
             path: '/graphs',
             element: <Graphs />
-        }  
+        },
+        {
+            path: '/',
+            element: <Home />
+        }
     ]
 };
 
