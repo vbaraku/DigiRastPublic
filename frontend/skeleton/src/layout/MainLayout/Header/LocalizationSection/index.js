@@ -119,6 +119,7 @@ const LocalizationSection = () => {
                         {language === 'en' && <TranslateTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
                     </Avatar>
                 </ButtonBase>
+                <div>{dictionary.language}</div>
                 <Backdrop
                     // make component show on top of every parent component
                     sx={{
@@ -170,9 +171,10 @@ const LocalizationSection = () => {
                                             primary={
                                                 <Grid container>
                                                     <Typography color="textPrimary">English</Typography>
-                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
+                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px', marginRight: 1 }}>
                                                         (UK)
                                                     </Typography>
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg" alt="UK flag" width="20" height="13" />
                                                 </Grid>
                                             }
                                         />
@@ -182,9 +184,10 @@ const LocalizationSection = () => {
                                             primary={
                                                 <Grid container>
                                                     <Typography color="textPrimary">ελληνική</Typography>
-                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                        (Greek)
+                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px', marginRight: 1 }}>
+                                                        (Greek) 
                                                     </Typography>
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/1200px-Flag_of_Greece.svg.png" alt="Greek flag" width="20" height="13" />
                                                 </Grid>
                                             }
                                         />
@@ -193,10 +196,11 @@ const LocalizationSection = () => {
                                         <ListItemText
                                             primary={
                                                 <Grid container>
-                                                    <Typography color="textPrimary">Polskie</Typography>
-                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
+                                                    <Typography color="textPrimary">Polski</Typography>
+                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px',  marginRight: 1 }}>
                                                         (Polish)
                                                     </Typography>
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Poland.svg/1200px-Flag_of_Poland.svg.png" alt="Polish flag" width="20" height="13" />
                                                 </Grid>
                                             }
                                         />
@@ -206,9 +210,10 @@ const LocalizationSection = () => {
                                             primary={
                                                 <Grid container>
                                                     <Typography color="textPrimary">Italiano</Typography>
-                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
+                                                    <Typography variant="caption" color="textSecondary" sx={{ ml: '8px', marginRight: 1 }}>
                                                         (Italian)
                                                     </Typography>
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/1200px-Flag_of_Italy.svg.png" alt="Italian flag" width="20" height="13" />
                                                 </Grid>
                                             }
                                         />

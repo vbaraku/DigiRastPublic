@@ -239,6 +239,9 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                     type="submit"
                                     variant="contained"
                                     color="secondary"
+                                    sx={{
+                                        textTransform: 'none',
+                                    }}
                                 >
                                     {dictionary.signIn}
                                 </Button>
