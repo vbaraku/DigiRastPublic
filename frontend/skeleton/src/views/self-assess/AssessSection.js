@@ -164,12 +164,20 @@ const AssessSection = ({ thematicElement, nextPage }) => {
                 {dictionary.fullyApplicable}
             </Typography>
             <Divider />
-            <Typography variant="h4" sx={{ mb: '10px', mt: '10px' }}>
-                {dictionary.theFollowingAssess}
-            </Typography>
-            {subElements.map((subElement, index) => (
-                <Typography key={index} sx={{fontSize: 14, margin: 2}}> - {subElement}</Typography>
-            ))}
+            {subElements.some(Boolean) && (
+                <>
+                    <Typography variant="h4" sx={{ mb: '10px', mt: '10px' }}>
+                    {dictionary.theFollowingAssess}
+                    </Typography>
+                    {subElements.map((subElement, index) =>
+                    subElement ? (
+                        <Typography key={index} sx={{ fontSize: 14, margin: 2 }}>
+                        - {subElement}
+                        </Typography>
+                    ) : null
+                    )}
+                </>
+            )}
             <Divider />
             <Box sx={{ minWidth: 120, marginTop: 2, textAlign: 'center' }}>
                 <form onSubmit={handleSubmit}>

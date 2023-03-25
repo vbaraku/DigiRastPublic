@@ -22,6 +22,7 @@ import { ResponsiveLine } from '@nivo/line';
 import RevenueCard from 'ui-component/cards/RevenueCard';
 import QuestionToolTip from '../self-assess/questiontooltip';
 import { useLanguage, useLanguageUpdate } from '../../LanguageContext';
+import { func } from 'prop-types';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 export default function Graphs() {
@@ -33,6 +34,7 @@ export default function Graphs() {
     const [averageOrgData, setAverageOrgData] = React.useState(0);
     const [completed, setCompleted] = React.useState(0);
     const [message, setMessage] = React.useState('');
+    const message2 = dictionary.graphMsg0;
 
     const [yourThematic, setYourThematic] = React.useState({});
     const [averageThematic, setAverageThematic] = React.useState({});
@@ -108,6 +110,21 @@ export default function Graphs() {
             console.error(err);
         }
     };
+
+    function getLink() {
+        let link = dictionary.link;
+        let msg = message.split('%');
+        //find word with % in message and hyperlink it with link
+        return (
+            <span>
+                {msg[0]}
+                <a href={link} target="_blank" style={{ textDecoration: 'underline', color: 'blue' }}>
+                {msg[1]}
+                </a>
+                {msg[2]}
+            </span>
+        );
+    }
 
     const getOrgAverageData = async () => {
         try {
@@ -292,7 +309,8 @@ export default function Graphs() {
     return (
         <MainCard title={dictionary.graphsAndCharts}>
             <div style={{ marginBottom: 15, textAlign: 'center'}}>
-                <Typography style={{fontSize: '20px'}}>{message}</Typography>
+                <Typography style={{fontSize: '20px', marginBottom: 25}}>{message2}</Typography>
+                <Typography style={{fontSize: '20px'}}>{getLink()}</Typography>
             </div>
             <Divider />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
