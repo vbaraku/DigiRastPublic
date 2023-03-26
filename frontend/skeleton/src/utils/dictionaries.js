@@ -438,7 +438,7 @@ const polish = {
     totalCompleted: 'Całkowita liczba ukończonych ocen (na podstawie filtrów)',
     link: 'https://q4edu.eu/io3-kurs-szkoleniowy/',
     graphMsg0: 'Jeśli wyniki oceny wskazują na jakiekolwiek obszary do poprawy dla Państwa organizacji, prosimy o zapoznanie się z materiałem szkoleniowym opracowanym w ramach projektu Q4EDU.',
-    graphMsg1: 'Osiągnięty profil cyfrowy jest to niższa ocena ogólna. Prosimy o odwiedzenie sekcji z całym materiałem szkoleniowym dla danego obszaru/ów i ponowne dokonanie oceny (po wdrożeniu działań doskonalących).',
+    graphMsg1: 'Osiągnięty profil cyfrowy jest to niższa ocena ogólna. Prosimy o odwiedzenie sekcji z całym materiałem szkoleniowym dla danego obszaru/ów (%tutaj%) i ponowne dokonanie oceny (po wdrożeniu działań doskonalących).',
     graphMsg2: 'Dobra robota, osiągnięty profil cyfrowy jest dobry. Więcej informacji na temat wyników można znaleźć %tutaj%:',
     graphMsg3: 'Gratulacje, osiągnięty profil cyfrowy jest zaawansowany. Więcej informacji na temat wyników można znaleźć %tutaj%:',
     legend: 'Legenda do wykresów:',
