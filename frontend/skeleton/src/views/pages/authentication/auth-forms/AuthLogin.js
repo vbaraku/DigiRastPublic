@@ -121,8 +121,8 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    email: Yup.string().email('Must be a valid email').max(255).required(dictionary.emailRequired),
+                    password: Yup.string().max(255).required(dictionary.passwordRequired)
                 })}
                 
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -157,7 +157,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email Address</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">{dictionary.email}</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
                                 type="email"
@@ -165,7 +165,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email Address / Username"
+                                label={dictionary.email}
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -180,7 +180,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">{dictionary.password}</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type={showPassword ? 'text' : 'password'}
@@ -201,7 +201,7 @@ const FirebaseLogin = ({ loginProp, ...others }) => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                label="Password"
+                                label={dictionary.email}
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (

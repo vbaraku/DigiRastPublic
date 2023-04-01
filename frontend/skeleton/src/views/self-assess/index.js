@@ -115,7 +115,7 @@ export default function SelfAssess() {
                     <Button
                         onClick={() => handleRedirect(category)}
                         variant="contained"
-                        sx={{ width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px', backgroundColor: value > 0 ? '#9AA497' : "primary" }}
+                        sx={{ textTransform: 'none', width: '100%', height: '60px', fontSize: '20px', marginBottom: '25px', backgroundColor: value > 0 ? '#9AA497' : "primary" }}
                     >
                         {++index}. {convertThematic(category)}
                     </Button>
