@@ -98,7 +98,7 @@ const FirebaseRegister = ({ ...others }) => {
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required(dictionary.emailRequired),
+                    email: Yup.string().email(dictionary.mustBeValidEmail).max(255).required(dictionary.emailRequired),
                     password: Yup.string().max(255).required(dictionary.passwordRequired)
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
