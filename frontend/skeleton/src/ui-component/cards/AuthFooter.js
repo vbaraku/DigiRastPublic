@@ -1,13 +1,19 @@
 // material-ui
 import { Link, Typography, Stack } from '@mui/material';
+import euLogo from 'assets/images/Cofound_EU_logo.png';
 
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
-const AuthFooter = () => (
+const AuthFooter = ({ dictionary }) => (
     <Stack direction="row" justifyContent="space-between">
-        <Typography variant="subtitle2" component={Link} href="https://www.seerc.org/" target="_blank" underline="hover">
-            seerc.org
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="subtitle2" sx={{ marginRight: 2 }}>
+                <img src={euLogo} alt="EU Logo" width="190" />
+            </Typography>
+            <Typography variant="subtitle2">
+                {dictionary.fundedBy}
+            </Typography>
+        </div>   
     </Stack>
 );
 

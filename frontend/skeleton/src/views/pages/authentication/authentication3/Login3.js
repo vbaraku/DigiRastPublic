@@ -33,6 +33,9 @@ const Login = () => {
                         <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
                             <AuthCardWrapper>
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
+                                    <Grid item xs={12} sx={{textAlign: 'center'}}>
+                                        {dictionary.digiRast}
+                                    </Grid>
                                     <Grid item sx={{ mb: 3 }}>
                                         <Link to="#">
                                             <Logo />
@@ -88,7 +91,7 @@ const Login = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sx={{ m: 3, mt: 1 }}>
-                    <AuthFooter />
+                    <AuthFooter dictionary={dictionary}/>
                 </Grid>
             </Grid>
         </AuthWrapper1>
