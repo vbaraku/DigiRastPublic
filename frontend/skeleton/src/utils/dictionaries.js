@@ -1,5 +1,6 @@
 const english = {
     hi: 'Hi, Welcome Back!',
+    projNum: 'Project number: 2020-1-PL01-KA226-VET-095343',
     email: 'Email Address',
     password: 'Password',
     poor: 'Poor',
@@ -166,6 +167,7 @@ const english = {
 
 const greek = {
     hi: "Γεια σας, καλώς ήρθατε!",
+    projNum: "Αριθμός έργου: 2019-1-GR01-KA203-064000",
     email: "Ηλεκτρονική διεύθυνση",
     password: "Κωδικός πρόσβασης",
     poor: 'Αδύναμος',
@@ -331,6 +333,7 @@ const greek = {
 
 const polish = {
     hi: 'Cześć, witaj ponownie!',
+    projNum: 'Numer projektu: 2020-1-PL01-KA226-VET-095343',
     email: 'Adres email',
     password: 'Hasło',
     poor: 'Słabe',
@@ -497,6 +500,7 @@ const polish = {
 
 const italian = {
     hi: 'Ciao, Bentornato!', 
+    projNum: 'Numero del progetto: 2019-1-IT01-KA203-061001',
     email: 'Indirizzo E-mail', 
     password: 'Password',
     poor: 'Debole',

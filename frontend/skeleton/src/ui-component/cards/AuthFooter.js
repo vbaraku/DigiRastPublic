@@ -11,6 +11,7 @@ const AuthFooter = ({ dictionary }) => (
                 <img src={euLogo} alt="EU Logo" width="190" />
             </Typography>
             <Typography variant="subtitle2">
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>{dictionary.projNum}</Typography> 
                 {dictionary.fundedBy}
             </Typography>
         </div>   
